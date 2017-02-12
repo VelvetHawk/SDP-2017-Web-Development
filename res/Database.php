@@ -1,8 +1,24 @@
 <?php
-/*  php data objects - available api for connecting to mysql database with php
-    In order to connect to mysql db with pdo we need to create new instance of the pdo class
-    and specify the dsn (data source name) database username, database password*/
-    /* https://phpdelusions.net/pdo#dsn */
+    /*
+        https://phpdelusions.net/pdo#dsn
+
+        PDO - php data objects - available api for connecting to mysql database with php
+        In order to connect to mysql db with pdo we need to create new instance of the pdo class
+        and specify the dsn (data source name) database username, database password.
+
+        -Database driver(mysql), host, db (schema) name and charset and less frequently port and
+        unix_socket go into DSN.
+        -Username and Password go to the constructor i.e. new PDO(...)
+        -All other options go into the options array i.e. $opt[...]
+        -DSN(Data Source Name) is a semicolon-delimited string. Consists of 'param=value' pairs
+        that begins with the driver name and a colon.
+        -IMPORTANT: no spaces in DSN.
+
+        DATABASE DRIVER , HOST , DB(SCHEMA) NAME , CHARSET
+
+        Store variables:
+    */
+
     $host = '127.0.0.1';
     $db   = 'register';
     $user = 'root';
@@ -10,6 +26,7 @@
     $charset = 'utf8';
 
     $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+    //DRIVER^    ^COLON      ^PARAM=VALUE PAIR
     $opt = [
         PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
