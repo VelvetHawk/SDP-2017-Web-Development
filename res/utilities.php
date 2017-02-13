@@ -7,19 +7,15 @@ function check_empty_fields($required_fields_array) {
     // initialize an Array to store any error messages
     $form_errors = array();
 
-    // Find list of elements of the form that are required
-    // Specify each of the items we want user to supply
-    $required_fields = array('email', 'username', 'password');
-
     /*
      * Loop through the required_fields array with each indexed position being assigned to name_of_field.
      * Condition first checks if email is set OR the value of email is equal to NULL, if that is true we assign
      * email to the form_error array. Next we check if the username is not set or if the value entered by user is
      * equal to null we store username in the form_errors array. Same for password.
      */
-    foreach($required_fields as $name_of_field) {
+    foreach($required_fields_array as $name_of_field) {
         if(!isset($_POST[$name_of_field]) || $_POST[$name_of_field]==NULL) {
-            $form_errors[] = $name_of_field;
+            $form_errors[] = $name_of_field . " is a required field";
         }
     }
     return $form_errors;

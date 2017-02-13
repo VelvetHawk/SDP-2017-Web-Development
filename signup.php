@@ -1,6 +1,7 @@
 <?php
 // Add database connection script
 include_once 'res/Database.php';
+include_once 'res/utilities.php';
 
 
 // Process the form
