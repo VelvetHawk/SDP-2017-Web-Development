@@ -44,7 +44,7 @@
         $pdo = new PDO($dsn, $user, $pass, $opt);
         // Set PDO error mode to Exception
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        echo "connected to the register db";
+        // echo "connected to the register db";
     } catch (PDOException $ex) {
 
         // If cant connect a message is displayed

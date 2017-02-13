@@ -3,17 +3,21 @@
 
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Homepage</title>
+    <title>Login Page</title>
+    <link rel="stylesheet" type="text/css" href="styles.css?<?php echo time(); ?>">
 </head>
 
 <body>
 
-<h2>User Authentication System</h2>
-
-<p>You are currently not signed in<br><a href="login.php">Login</a><br>Not yet a member?
-    <a href="signup.php">Sign up here</a></p>
-
-<p>You are logged in as {username} <a href="logout.php">Logout</a></p>
-
+    <h2>User Authentication System</h2>
+    <h3>Login Form</h3>
+    <form method="post" action="">
+        <table>
+            <tr><td>Username:</td> <td><input type="text" value=""</td></tr>
+            <tr><td>Password:</td> <td><input type="password" value=""</td></tr>
+            <tr><td></td> <td><input type="submit" value="Login"></td></tr>
+        </table>
+    </form>
+<p><a href="index.php">Back</a></p>
 </body>
 </html>
