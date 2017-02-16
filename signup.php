@@ -53,10 +53,10 @@ if(isset($_POST['signupButton'])) {
 
             // Check if one new row was created
             if ($statement->rowCount() == 1) {
-                $result = "<p style='padding: 20px; color: green;'>Registration successful</p>";
+                $result = "<p style='padding: 20px; border: 1px solid gray; color: green;'>Registration successful</p>";
             }
         } catch (PDOException $ex) {
-            $result = "<p style='padding: 20px; color: red;'>Registration not successful:" . $ex->getMessage() . "</p>";
+            $result = "<p style='padding: 20px; border: 1px solid gray; color: red;'>Registration not successful:" . $ex->getMessage() . "</p>";
         }
     } else {
         if(count($form_errors)==1) {
@@ -81,8 +81,9 @@ if(isset($_POST['signupButton'])) {
 <h2>User Authentication System</h2><hr>
 <h3>Registration form</h3>
 
-<?php if(isset($result)) echo $result;?>
-<?php if(!empty($form_errors)) echo show_errors($form_errors); ?>
+<?php if(isset($result)) echo $result; ?>
+<?php if(!empty($form_errors)) echo show_errors($form_errors);
+?>
 <form method="post" action="">
     <table>
         <tr><td>Email:</td> <td><input type="text" value="" name="email"</td></tr>

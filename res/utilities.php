@@ -49,13 +49,13 @@ function check_email($data) {
     if(array_key_exists($key, $data)) {
 
         // Check if the email field has a value
-        if($_POST[$key] != NULL) {
+        if($_POST[$key] != null) {
 
             // Remove all illegal characters from email
             $key = filter_var($key, FILTER_SANITIZE_EMAIL);
 
             // Check if input is a value email address
-            if(filter_var($_POST[$key], FILTER_VALIDATE_EMAIL)===false) {
+            if(filter_var($_POST[$key], FILTER_VALIDATE_EMAIL) === false) {
                 $form_errors[] = $key . " is not a valid email address";
             }
         }
@@ -70,11 +70,11 @@ function check_email($data) {
 function show_errors($form_errors_array) {
     $errors = "<p><ul style='color: red;'>";
 
-    // Loop through error array and displayall the items in a list
+    // Loop through error array and display all the items in a list
     foreach($form_errors_array as $the_error) {
-        $errors .= "<li {$the_error} </li>";
+        $errors .= "<li> {$the_error} </li>";
+
     }
     $errors .= "</ul></p>";
     return $errors;
 }
-?>
