@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="475fece8-7503-46d3-8884-2f79be29203f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/forgot_password.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/login.php" afterPath="$PROJECT_DIR$/login.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/logout.php" afterPath="$PROJECT_DIR$/logout.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/session.php" afterPath="$PROJECT_DIR$/res/session.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/utilities.php" afterPath="$PROJECT_DIR$/res/utilities.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/signup.php" afterPath="$PROJECT_DIR$/signup.php" />
-    </list>
+    <list default="true" id="475fece8-7503-46d3-8884-2f79be29203f" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -88,7 +79,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="login.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="login.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/login.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="696">
@@ -124,7 +115,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="signup.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="signup.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/signup.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="629">
@@ -193,8 +184,8 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="PHP" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1245" />
-    <option name="width" value="1252" />
+    <option name="x" value="-953" />
+    <option name="width" value="960" />
     <option name="height" value="1047" />
   </component>
   <component name="ProjectView">
@@ -350,12 +341,12 @@
       <workItem from="1487066053862" duration="373000" />
       <workItem from="1487156941979" duration="918000" />
       <workItem from="1487158552741" duration="1654000" />
-      <workItem from="1487241326861" duration="17988000" />
+      <workItem from="1487241326861" duration="18015000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56734000" />
+    <option name="totallyTimeSpent" value="56761000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -367,10 +358,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1245" y="0" width="1252" height="1047" extended-state="0" />
+    <frame x="-953" y="0" width="960" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21763754" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16313559" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="PHP-CGI Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
@@ -844,20 +835,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/signup.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="55" column="61" lean-forward="false" selection-start-line="55" selection-start-column="61" selection-end-line="55" selection-end-column="61" />
-          <folding>
-            <marker date="1487264112565" expanded="true" signature="1673:1792" ph="INSERT INTO users... " />
-            <marker date="1487264112565" expanded="true" signature="2228:2280" ph="..." />
-            <marker date="1487264112565" expanded="true" signature="2396:2446" ph="..." />
-            <marker date="1487264112565" expanded="true" signature="2601:2612" ph="..." />
-            <marker date="1487264112565" expanded="true" signature="2702:2713" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/forgot_password.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-52">
@@ -887,6 +864,20 @@
             <marker date="1487271523481" expanded="true" signature="1595:1604" ph="..." />
             <marker date="1487271523481" expanded="true" signature="1702:1711" ph="..." />
             <marker date="1487271523481" expanded="true" signature="1830:1843" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/signup.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="55" column="61" lean-forward="false" selection-start-line="55" selection-start-column="61" selection-end-line="55" selection-end-column="61" />
+          <folding>
+            <marker date="1487264112565" expanded="true" signature="1673:1792" ph="INSERT INTO users... " />
+            <marker date="1487264112565" expanded="true" signature="2228:2280" ph="..." />
+            <marker date="1487264112565" expanded="true" signature="2396:2446" ph="..." />
+            <marker date="1487264112565" expanded="true" signature="2601:2612" ph="..." />
+            <marker date="1487264112565" expanded="true" signature="2702:2713" ph="..." />
           </folding>
         </state>
       </provider>
