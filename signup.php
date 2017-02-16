@@ -7,6 +7,7 @@ include_once 'res/utilities.php';
 // Process the form
 // Is the button clicked and not null
 if(isset($_POST['signupButton'])) {
+
     // initialize an Array to store any error messages
     $form_errors = array();
 
@@ -14,17 +15,17 @@ if(isset($_POST['signupButton'])) {
     // Specify each of the items we want user to supply
     $required_fields = array('email', 'username', 'password');
 
-    /*
-     * Loop through the required_fields array with each indexed position being assigned to name_of_field.
-     * Condition first checks if email is set OR the value of email is equal to NULL, if that is true we assign
-     * email to the form_error array. Next we check if the username is not set or if the value entered by user is
-     * equal to null we store username in the form_errors array. Same for password.
-     */
-    foreach($required_fields as $name_of_field) {
-        if(!isset($_POST[$name_of_field]) || $_POST[$name_of_field]==NULL) {
-            $form_errors[] = $name_of_field;
-        }
-    }
+    // Call the function to check empty field and merge the return data into form_error array
+    $form_errors = array_merge($form_errors, check_empty_fields($required_fields));
+
+    // Fields that require checking for minimum length
+    $fields_to_check_length = array('username' => 4, 'password' => 6);
+
+    // Call the function to check minimum required length and merge the return data into form_error array
+    $form_errors = array_merge($form_errors, check_min_length($fields_to_check_length));
+
+    // Email validation / merge the return data into form_error array
+    $form_errors = array_merge($form_errors, check_email($_POST));
 
     // Check if the error array is empty. If it is empty then no error has been returned.
     // If yes process form data and insert record
@@ -60,20 +61,8 @@ if(isset($_POST['signupButton'])) {
     } else {
         if(count($form_errors)==1) {
             $result = "<p style='color: red;'>There was one error in the form<br>";
-            $result .= "<ul style='color: red;'>";
-            // Loop through error array and display item
-            foreach ($form_errors as $error) {
-                $result .= "<li> {$error} </li>";
-            }
-            $result .= "</ul></p>";
         } else {
             $result = "<p style='color: red;'>There were ".count($form_errors)." errors in the form <br>";
-            $result .= "<ul style='color: red;'>";
-            // Loop through error array and display all items
-            foreach($form_errors as $error) {
-                $result .= "<li> {$error}</li>";
-            }
-            $result .= "</ul></p>";
         }
     }
 }
@@ -93,6 +82,7 @@ if(isset($_POST['signupButton'])) {
 <h3>Registration form</h3>
 
 <?php if(isset($result)) echo $result;?>
+<?php if(!empty($form_errors)) echo show_errors($form_errors); ?>
 <form method="post" action="">
     <table>
         <tr><td>Email:</td> <td><input type="text" value="" name="email"</td></tr>

@@ -12,7 +12,7 @@
     <h2>User Authentication System</h2><hr>
 
     <p>You are currently not signed in<br><a href="login.php">Login</a><br>
-        Not yet a member?<a href="signup.php">Sign up here</a>
+        Not yet a member? <a href="signup.php">Sign up here</a>
     </p>
 
     <p>You are logged in as {uesername} <a href="logout.php">Logout</a>
