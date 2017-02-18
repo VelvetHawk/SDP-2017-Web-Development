@@ -27,17 +27,24 @@ if(isset($_POST['signupButton'])) {
     // Email validation / merge the return data into form_error array
     $form_errors = array_merge($form_errors, check_email($_POST));
 
+    // Collect form data and store in variables
+    $email = $_POST['email'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    if(checkDuplicateEntries("users", "email", $email, $pdo)) {
+        $result = flashMessage("Email is already taken");
+    }
+    else if(checkDuplicateEntries("users", "username", $username, $pdo)) {
+        $result = flashMessage("Username is already taken");
+    }
     // Check if the error array is empty. If it is empty then no error has been returned.
     // If yes process form data and insert record
-    if(empty($form_errors)) {
-        // Collect form data and store in variables
-        $email = $_POST['email'];
-        $username = $_POST['username'];
-        $password = $_POST['password'];
+    else if(empty($form_errors)) {
+
 
         // Take password variable and apply password_hash function to it
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
         try {
 
             // Create SQL insert statement
@@ -53,16 +60,16 @@ if(isset($_POST['signupButton'])) {
 
             // Check if one new row was created
             if ($statement->rowCount() == 1) {
-                $result = "<p style='padding: 20px; border: 1px solid gray; color: green;'>Registration successful</p>";
+                $result = flashMessage("Registration Successful", "Pass");
             }
         } catch (PDOException $ex) {
-            $result = "<p style='padding: 20px; border: 1px solid gray; color: red;'>Registration not successful:" . $ex->getMessage() . "</p>";
+            $result = flashMessage("An error occurred: " .$ex->getMessage());
         }
     } else {
         if(count($form_errors)==1) {
-            $result = "<p style='color: red;'>There was one error in the form<br>";
+            $result = flashMessage("There was 1 error in the form<br>");
         } else {
-            $result = "<p style='color: red;'>There were ".count($form_errors)." errors in the form <br>";
+            $result = flashMessage("There were ".count($form_errors)." errors in the form <br>");
         }
     }
 }

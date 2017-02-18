@@ -78,3 +78,48 @@ function show_errors($form_errors_array) {
     $errors .= "</ul></p>";
     return $errors;
 }
+
+/**
+ * @param $message replace with an error message
+ * @param string $passOrFail pass in "pass" with the function if its a positive message
+ * @return string
+ */
+function flashMessage($message, $passOrFail = "Fail") {
+    if($passOrFail === "Pass") {
+        $data = "<p style='padding: 20px; border: 1px solid gray; color: green;'>{$message}</p>";
+    } else {
+        $data = "<p style='padding: 20px; border: 1px solid gray; color: red;'>{$message}</p>";
+    }
+
+    return $data;
+}
+
+/**
+ * @param $page pass in the page to redirect to
+ */
+function redirectTo($page) {
+    header("location: {$page}.php");
+}
+
+/**
+ * @param $value
+ * @param $pdo
+ * @return bool
+ * UPDATE: now more flexible
+ */
+function checkDuplicateEntries($table, $column_name, $value, $pdo) {
+    try {
+        $sqlQuery = "SELECT * FROM " .$table. " WHERE " .$column_name."=:$column_name";
+        $statement = $pdo->prepare($sqlQuery);
+        $statement->execute(array(":$column_name" => $value));
+
+        if($row = $statement->fetch()) {
+            return true;
+        }
+        return false;
+    } catch (PDOException $ex) {
+        // handle exemption
+    }
+}
+
+

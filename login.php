@@ -32,18 +32,18 @@
                 if(password_verify($password, $hashed_password)) {
                     $_SESSION['id'] = $id;
                     $_SESSION['username'] = $username;
-                    header("location: index.php");
+                    redirectTo('index');
                 } else {
                     // if error store message in result
-                    $result = "<p style='padding: 20px; color: red; border: 1px solid gray;'> Invalid username or password</p>";
+                    $result = flashMessage("Invalid username or password");
 
                 }
             }
         } else {
             if(count($form_errors) == 1) {
-                $result = "<p style='color:red'>There was one error in the form</p>";
+                $result = flashMessage("There was one error in the form");
             } else {
-                $result = "<p style='color:red'>There was " .count($form_errors). " errors in the form</p>";
+                $result = flashMessage("There was " .count($form_errors). " errors in the form");
             }
         }
     }
