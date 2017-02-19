@@ -1,104 +1,53 @@
+
 <?php
-// Add database connection script
-include_once 'res/Database.php';
-include_once 'res/utilities.php';
-
-
-// Process the form
-// Is the button clicked and not null
-if(isset($_POST['signupButton'])) {
-
-    // initialize an Array to store any error messages
-    $form_errors = array();
-
-    // Find list of elements of the form that are required
-    // Specify each of the items we want user to supply
-    $required_fields = array('email', 'username', 'password');
-
-    // Call the function to check empty field and merge the return data into form_error array
-    $form_errors = array_merge($form_errors, check_empty_fields($required_fields));
-
-    // Fields that require checking for minimum length
-    $fields_to_check_length = array('username' => 4, 'password' => 6);
-
-    // Call the function to check minimum required length and merge the return data into form_error array
-    $form_errors = array_merge($form_errors, check_min_length($fields_to_check_length));
-
-    // Email validation / merge the return data into form_error array
-    $form_errors = array_merge($form_errors, check_email($_POST));
-
-    // Collect form data and store in variables
-    $email = $_POST['email'];
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
-    if(checkDuplicateEntries("users", "email", $email, $pdo)) {
-        $result = flashMessage("Email is already taken");
-    }
-    else if(checkDuplicateEntries("users", "username", $username, $pdo)) {
-        $result = flashMessage("Username is already taken");
-    }
-    // Check if the error array is empty. If it is empty then no error has been returned.
-    // If yes process form data and insert record
-    else if(empty($form_errors)) {
-
-
-        // Take password variable and apply password_hash function to it
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        try {
-
-            // Create SQL insert statement
-            $sqlInsert = "INSERT INTO users (username, email, password, join_date)
-                  VALUES (:username, :email, :password, now())";
-
-            // Prepare a statement for execution and returns a statement object
-            $statement = $pdo->prepare($sqlInsert);
-
-            // Add the data into the database
-            $statement->execute(array(':username' => $username, ':email' => $email, ':password' => $hashed_password));
-
-
-            // Check if one new row was created
-            if ($statement->rowCount() == 1) {
-                $result = flashMessage("Registration Successful", "Pass");
-            }
-        } catch (PDOException $ex) {
-            $result = flashMessage("An error occurred: " .$ex->getMessage());
-        }
-    } else {
-        if(count($form_errors)==1) {
-            $result = flashMessage("There was 1 error in the form<br>");
-        } else {
-            $result = flashMessage("There were ".count($form_errors)." errors in the form <br>");
-        }
-    }
-}
+$page_title = "User authentication - Registration page";
+include_once 'partials/headers.php';
+include_once 'partials/parseSignup.php';
 ?>
-<!DOCTYPE html>
-<html>
 
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>Register Page</title>
-    <link rel="stylesheet" type="text/css" href="styles.css?<?php echo time(); ?>">
-</head>
+<div class="container">
+    <section class="col col-lg-7">
 
-<body>
+        <h2>Registration form</h2><hr>
 
-<h2>User Authentication System</h2><hr>
-<h3>Registration form</h3>
+        <!-- keep error seperate from rest of form -->
+        <div>
+            <?php if(isset($result)) echo $result; ?>
+            <?php if(!empty($form_errors)) echo show_errors($form_errors); ?>
+        </div>
 
-<?php if(isset($result)) echo $result; ?>
-<?php if(!empty($form_errors)) echo show_errors($form_errors);
+        <div class="clearfix"></div>
+
+        <!-- bootstrap basic form -->
+        <form action="" method="post">
+            <div class="form-group">
+                <!-- EMAIL -->
+                <label for="emailField">Email</label>
+                <input type="email" class="form-control" name="email" id="emailField" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <!-- USERNAME -->
+                <label for="usernameField">Username</label>
+                <input type="text" class="form-control" name="username" id="usernameField" placeholder="Username">
+            </div>
+            <div class="form-group">
+                <!-- PASSWORD -->
+                <label for="passwordField">Password</label>
+                <input type="password" class="form-control" name="password" id="passwordField" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <!-- FILE -->
+                <label for="exampleInputFile">File input</label>
+                <input type="file" id="exampleInputFile">
+                <p class="help-block">Example block-level help text here.</p>
+            </div>
+            <button type="submit" name="signupButton" class="btn btn-primary pull-right">Sign up</button>
+        </form>
+    </section>
+    <p><a href="index.php">Back</a></p>
+</div>
+<?php
+include_once 'partials/footers.php'
 ?>
-<form method="post" action="">
-    <table>
-        <tr><td>Email:</td> <td><input type="text" value="" name="email"</td></tr>
-        <tr><td>Username:</td> <td><input type="text" value="" name="username"</td></tr>
-        <tr><td>Password:</td> <td><input type="password" value="" name="password"</td></tr>
-        <tr><td></td> <td><input type="submit" value="Signup" name="signupButton"></td></tr>
-    </table>
-</form>
-<p><a href="index.php">Back</a></p>
 </body>
 </html>

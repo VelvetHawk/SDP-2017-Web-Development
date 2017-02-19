@@ -1,77 +1,53 @@
 <?php
-    include_once 'res/session.php';
-    include_once 'res/Database.php';
-    include_once 'res/utilities.php';
+    $page_title = "User authentication - Login Page";
+    include_once 'partials/headers.php';
+    include_once 'partials/parseLogin.php';
+    ?>
 
-    // If login button was clicked
-    if(isset($_POST['loginButton'])) {
+<div class="container">
+    <section class="col col-lg-7">
 
-        // Initialise array to hold errors
-        $form_errors = array();
+        <h2>Login Form</h2><hr>
 
-        // Validate
-        $required_fields = array('username', 'password');
+        <!-- keep error seperate from rest of form -->
+        <div>
+            <?php if(isset($result)) echo $result; ?>
+            <?php if(!empty($form_errors)) echo show_errors($form_errors); ?>
+        </div>
 
-        $form_errors = array_merge($form_errors, check_empty_fields($required_fields));
-
-        // If no error found
-        if(empty($form_errors)) {
-            // Collect form data
-            $user = $_POST['username'];
-            $password = $_POST['password'];
-            // Check if user exists in the database
-            $sqlQuery = "SELECT * FROM users WHERE username = :username";
-            $statement = $pdo->prepare($sqlQuery);
-            $statement->execute(array(':username' => $user));
-
-            while($row = $statement->fetch()) {
-                $id = $row['id'];
-                $hashed_password = $row['password'];
-                $username = $row['username'];
-
-                if(password_verify($password, $hashed_password)) {
-                    $_SESSION['id'] = $id;
-                    $_SESSION['username'] = $username;
-                    redirectTo('index');
-                } else {
-                    // if error store message in result
-                    $result = flashMessage("Invalid username or password");
-
-                }
-            }
-        } else {
-            if(count($form_errors) == 1) {
-                $result = flashMessage("There was one error in the form");
-            } else {
-                $result = flashMessage("There was " .count($form_errors). " errors in the form");
-            }
-        }
-    }
-?>
+        <div class="clearfix"></div>
 
 
-<!DOCTYPE html>
-<html>
-
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>Login Page</title>
-    <link rel="stylesheet" type="text/css" href="styles.css?<?php echo time(); ?>">
-</head>
-
-<body>
-
-    <h2>User Authentication System</h2>
-    <h3>Login Form</h3>
-    <?php if(isset($result)) echo $result; ?>
-    <?php if(!empty($form_errors)) echo show_errors($form_errors); ?>
-    <form method="post" action="">
-        <table>
-            <tr><td>Username:</td> <td><input type="text" value="" name="username"></td></tr>
-            <tr><td>Password:</td> <td><input type="password" value="" name="password"></td></tr>
-            <tr><td><a href="forgot_password.php">Forgot Password?</a></td></td> <td><input type="submit" name="loginButton" value="Login button"></td></tr>
-        </table>
-    </form>
-<p><a href="index.php">Back</a></p>
-</body>
-</html>
+        <!-- bootstrap basic form -->
+        <form action="" method="post">
+            <div class="form-group">
+                <!-- USERNAME -->
+                <label for="usernameField">Username</label>
+                <input type="text" class="form-control" name="username" id="usernameField" placeholder="Username">
+            </div>
+            <div class="form-group">
+                <!-- PASSWORD -->
+                <label for="passwordField">Password</label>
+                <input type="password" class="form-control" name="password" id="passwordField" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <!-- FILE -->
+                <label for="exampleInputFile">File input</label>
+                <input type="file" id="exampleInputFile">
+                <p class="help-block">Example block-level help text here.</p>
+            </div>
+            <div class="checkbox">
+                <!-- REMEMBER ME -->
+                <label>
+                    <input name="remember" type="checkbox"> Remember me?
+                </label>
+            </div>
+            <a href="forgot_password.php">F0rg07 p@55w0rd?</a>
+            <button type="submit" name="loginButton" class="btn btn-primary pull-right">Sign in</button>
+        </form>
+    </section>
+    <p><a href="index.php">Back</a></p>
+</div>
+    <?php
+    include_once 'partials/footers.php'
+    ?>

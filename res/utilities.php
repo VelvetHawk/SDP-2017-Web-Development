@@ -86,9 +86,9 @@ function show_errors($form_errors_array) {
  */
 function flashMessage($message, $passOrFail = "Fail") {
     if($passOrFail === "Pass") {
-        $data = "<p style='padding: 20px; border: 1px solid gray; color: green;'>{$message}</p>";
+        $data = "<div class='alert alert-success'></div><p>{$message}</p>";
     } else {
-        $data = "<p style='padding: 20px; border: 1px solid gray; color: red;'>{$message}</p>";
+        $data = "<div class='alert alert-danger'<p>{$message}</p>";
     }
 
     return $data;
