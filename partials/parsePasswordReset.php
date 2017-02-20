@@ -3,6 +3,7 @@
 include_once 'res/Database.php';
 include_once 'res/utilities.php';
 
+
 //process the form if the reset password button is clicked
 if(isset($_POST['passwordResetBtn'])){
     //initialize an array to store any error message from the form

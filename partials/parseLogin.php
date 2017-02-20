@@ -15,9 +15,14 @@ if(isset($_POST['loginButton'])) {
 
     // If no error found
     if(empty($form_errors)) {
+
         // Collect form data
         $user = $_POST['username'];
         $password = $_POST['password'];
+
+        // implement cookie remember me functions here
+        // has the user clicked the remember me button
+        isset($_POST['remember']) ? $remember = $_POST['remember'] : $remember = "";
         // Check if user exists in the database
         $sqlQuery = "SELECT * FROM users WHERE username = :username";
         $statement = $pdo->prepare($sqlQuery);
@@ -31,6 +36,19 @@ if(isset($_POST['loginButton'])) {
             if(password_verify($password, $hashed_password)) {
                 $_SESSION['id'] = $id;
                 $_SESSION['username'] = $username;
+
+                // store IP address of user trying to log in to the system and concatanate it with
+                // string that is produced by the browser itself and sent to the webserverto identify itself
+                // so that websites are able to send different content based on the type of browser your using
+                // and browser compatibility
+                $fingerprint = md5($_SERVER['REMOTE_ADDR'] . $_SERVER['HTTP_USER_AGENT']);
+                $_SESSION['last_active'] = time(); // system time of webserver (when user logged into system)
+                $_SESSION['fingerprint'] = $fingerprint;
+
+                // if remember me is equal to value we set
+                if($remember === "yes") {
+                    rememberMe($id);
+                }
 
                 // call sweet alert
                 echo $welcome = "<script type=\"text/javascript\">

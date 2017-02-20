@@ -37,9 +37,9 @@
                 <p class="help-block">Example block-level help text here.</p>
             </div>
             <div class="checkbox">
-                <!-- REMEMBER ME -->
+                <!-- REMEMBER ME CHECKBOX -->
                 <label>
-                    <input name="remember" type="checkbox"> Remember me?
+                    <input name="remember" value="yes" type="checkbox"> Remember me?
                 </label>
             </div>
             <a href="forgot_password.php">F0rg07 p@55w0rd?</a>

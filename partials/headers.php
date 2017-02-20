@@ -1,10 +1,7 @@
-<!--
-Add this header section to all pages
--->
-
-
 <?php
-include_once 'res/session.php'
+include_once 'res/session.php';
+include_once 'res/Database.php';
+include_once 'res/utilities.php';
 ?>
 
 <!DOCTYPE html>
@@ -44,10 +41,11 @@ include_once 'res/session.php'
             <a class="navbar-brand" href="index.php">User Authentication</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
+            <!-- guard returns true or false, if true it will display 1 in browser so using class hide -->
+            <ul class="nav navbar-nav"><i class="hide"><?php echo guard(); ?></i>
                 <!-- show if user logged in -->
                 <li><a href="index.php">Home</a></li>
-                <?php if(isset($_SESSION['username'])): ?>
+                <?php if((isset($_SESSION['username']) || isCookieValid($pdo))): ?>
                     <li><a href="#">My Profile</a></li>
                     <li><a href="logout.php">Logout</a></li>
                     <!-- if user not logged in display menus that were there before -->
