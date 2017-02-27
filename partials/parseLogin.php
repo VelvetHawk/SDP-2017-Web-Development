@@ -34,6 +34,7 @@ if(isset($_POST['loginButton'])) {
             $username = $row['username'];
 
             if(password_verify($password, $hashed_password)) {
+                // create session when user logs into system
                 $_SESSION['id'] = $id;
                 $_SESSION['username'] = $username;
 
@@ -56,13 +57,13 @@ if(isset($_POST['loginButton'])) {
                                       title: \"Welcome back $username!\",
                                       text: \"You are being logged in.\",
                                       type: 'success',
-                                      timer: 6000, /*6 seconds*/
+                                      timer: 2000, /*3 seconds*/
                                       showConfirmButton: false
                                     });
                                     
                                    setTimeout(function(){
                                                 window.location.href = 'index.php';
-                                              }, 5000);
+                                              }, 2000);
                             </script>";
                 // this php will be processed BEFORE the above javascript
                 // redirectTo('index');

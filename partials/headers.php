@@ -46,7 +46,7 @@ include_once 'res/utilities.php';
                 <!-- show if user logged in -->
                 <li><a href="index.php">Home</a></li>
                 <?php if((isset($_SESSION['username']) || isCookieValid($pdo))): ?>
-                    <li><a href="#">My Profile</a></li>
+                    <li><a href="profile.php">My Profile</a></li>
                     <li><a href="logout.php">Logout</a></li>
                     <!-- if user not logged in display menus that were there before -->
                 <?php else: ?>

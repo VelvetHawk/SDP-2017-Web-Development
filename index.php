@@ -11,7 +11,8 @@ include_once 'partials/headers.php';
                 All you get is this text and a mostly barebones HTML document.</p>
             <?php if(!isset($_SESSION['username'])): ?>
                 <p class="lead">You are currently not signed in<br><a href="login.php">Login</a><br>
-                    Not yet a member? <a href="signup.php">Sign up here</a>
+                    Not yet a member? <a href="signup.php">Sign up here</a><br>
+                    browser info...
                 </p>
             <?php else: ?>
                 <p class="lead">You are logged in as <?php if(isset($_SESSION['username'])) echo $_SESSION['username']; ?> <a href="logout.php">Logout</a></p>
