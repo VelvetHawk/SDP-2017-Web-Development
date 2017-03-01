@@ -28,12 +28,12 @@ if(isset($_POST['loginButton'])) {
         $statement = $pdo->prepare($sqlQuery);
         $statement->execute(array(':username' => $user));
 
-        while($row = $statement->fetch()) {
+        if ($row = $statement->fetch()) {
             $id = $row['id'];
             $hashed_password = $row['password'];
             $username = $row['username'];
 
-            if(password_verify($password, $hashed_password)) {
+            if (password_verify($password, $hashed_password)) {
                 // create session when user logs into system
                 $_SESSION['id'] = $id;
                 $_SESSION['username'] = $username;
@@ -47,7 +47,7 @@ if(isset($_POST['loginButton'])) {
                 $_SESSION['fingerprint'] = $fingerprint;
 
                 // if remember me is equal to value we set
-                if($remember === "yes") {
+                if ($remember === "yes") {
                     rememberMe($id);
                 }
 
@@ -69,9 +69,11 @@ if(isset($_POST['loginButton'])) {
                 // redirectTo('index');
             } else {
                 // if error store message in result
-                $result = flashMessage("Invalid username or password");
+                $result = flashMessage("You have entered an invalid password");
 
             }
+        } else {
+            $result = flashMessage("You have entered an invalid username");
         }
     } else {
         if(count($form_errors) == 1) {

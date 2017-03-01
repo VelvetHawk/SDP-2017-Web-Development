@@ -227,3 +227,21 @@ function isValidImage($file) {
     $form_errors[] = $extension . " is not a valid image extension";
     return $form_errors;
 }
+
+function uploadAvatar($username) {
+    $isImageMoved = false;
+    if($_FILES['avatar']['tmp_name']) {
+
+        // file in the templocation
+        $temp_file = $_FILES['avatar']['tmp_name'];
+        $ds = DIRECTORY_SEPARATOR; // uploads/
+        $avatar_name = $username.".jpg";
+
+        $path = "uploads".$ds.$avatar_name; //uploads/demo.jpg
+
+        if(move_uploaded_file($temp_file, $path)) {
+            $isImageMoved = true;
+        }
+    }
+    return $isImageMoved;
+}
