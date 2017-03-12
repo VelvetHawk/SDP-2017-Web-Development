@@ -1,5 +1,5 @@
 <html>
 	<footer>
-		This is a test message
+		<p class="copyright">&copy; Untitled. All rights reserved.</p>
 	</footer>
 </html>
