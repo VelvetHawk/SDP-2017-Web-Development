@@ -4072,3 +4072,19 @@
 			margin-top: 0;
 			padding-top: 0;
 		}
+
+	.error {
+		border: 1px solid;
+		margin-left: 5em;
+		padding: 0 2em 2em 2em;
+		color: #D8000C;
+		background-color: #FFBABA;
+		width: 90%;
+	}
+
+	/* Task page */
+	.task {
+		margin-left: 5em;
+		padding: 2em 2em 2em 2em;
+		border: solid green;
+	}
