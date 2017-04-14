@@ -14,7 +14,7 @@
 		<?php
 			include_once "res/partials/head.php";
 		?>
-		<title>Proofreadr - For all your grammar needs</title>
+		<title>My Tasks</title>
 		<meta name="description" content="">
 	</head>
 	<body>
@@ -41,17 +41,17 @@
 											if (!(isset($_SESSION['username']) || isCookieValid($GLOBALS['pdo'])))
                                        			redirectTo('index');
                                        		elseif (isset($_GET['id']))
-											{
-												$id = $_GET['id'];
-
-												/*
-													-DECLARE PDO
-													-CREATE CONNECTION
-													-RETRIEVE DATA FOR THIS POST
-													-PRESENT ON PAGE
-													-GIVE OPTION TO CLAIM TASK
-													-IF MOD, GIVE OPTION TO FLAG TASK
-												*/
+                                       		{
+                                       			$id = $_GET['id'];
+                                       			$username = $_SESSION['username'];
+                                       			$query = "SELECT task_id FROM Tasks WHERE user_id = $username AND task_id = $id;";
+                                       			$value = array();
+                                       			// Make sure task is owned by this user
+                                       			foreach ($GLOBALS['pdo'] -> query($query) as $task)
+												{
+													if (sizeof($task) < 1)
+														redirectTo('my-tasks');
+												}
 
 												$title;
 												$type;
@@ -75,12 +75,21 @@
 												// Retrieve tags
 												$tag_values = getTaskTags($id);
 
-												echo "<div id=\"view-task\" class=\"task\"><br />";
+												$status = getTaskStatus($_GET['id']);
+
+												echo "<div class=\"task\"><br />";
 												echo "<h2 class=\"task-title\">$test</h2>";
 												echo "Claim deadline:  " . date("jS F, Y", strtotime($claim_deadline)) . "<br />";
 												echo "Review deadline:  " . date("jS F, Y", strtotime($review_deadline)) . "<br />";
 												echo "Type:  $type<br />";
 												echo "Words:  $words<br />Pages:  $pages<br />";
+												echo "Status:  " . $status . "<br />";
+												if ($status == "Claimed")
+												{
+													$query = "SELECT first_name, last_name, email FROM Users WHERE user_id = (SELECT claimant FROM Claimed_Tasks WHERE task_id = $id);";
+													foreach ($GLOBALS['pdo'] -> query($query) as $task)
+														echo "Claimed by:  " . $task['first_name'] . " " . $task['last_name'] . "  (" . $task['email'] . ")<br />";
+												}
 												echo "<br /><br />";
 												echo "<p>$description</p>";
 												// print_r($tag_values);
@@ -88,24 +97,24 @@
 												for ($i = 0; $i < sizeof($tag_values); $i++)
 													echo "<li>".$tag_values[$i]."</li>";
 												echo "</ul>";
-												// Claim functionality
-												echo "<form id=\"claim-form\" action=\"res/utils/claim.php\" method=\"post\">";
-												echo "<input name=\"id\" type=\"hidden\" value=\"$id\"/>";
 												echo	"<ul class=\"actions\">";
-												echo "<li><button type=\"submit\" id=\"claim\" class=\"button\">Claim</button></li>";
-												echo	"</form>";
-												// Preview functionality
-												echo "<li><a href=\"#\" class=\"button\">Preview</a></li>";
-												// Flag functionality
-												echo "<li><button id=\"flag\" type=\"button\" onClick=\"flagTask()\" class=\"button\">Flag</button></li>"; # NEED A CHECK ON SCORE HERE
+												if ($status == "Completed")
+													echo "<li><a href=\"#\" class=\"button\">Rate</a></li>"; // FIX ABILITY TO RATE COMPLETED TASK
+												elseif ($status != "Claimed") // Make sure that if task is claimed, owner can't do anything
+												{
+													echo "<li><button onClick=\"cancelTask()\" type=\"button\" class=\"button\">Unpublish</button></li>";
+													echo "<li><a href=\"#\" class=\"button\">Edit</a></li>";
+												}
+												/*
+													GOING TO NEED TO BE A RATING BUTTON INSTEAD OF EDIT/UNPUBLISH IF TASK IS COMPLETED
+												*/
 												echo	"</ul>";
 												echo "</div>";
-												echo "<input id=\"task_id\" type=\"hidden\" value=\"$id\">";
 											}
 											else
 											{
 												// This will redirect to home.php when no task id is sent to task.php
-												redirectTo('home');
+												redirectTo('my-tasks');
 												// echo "ID not set";
 											}
 										?>

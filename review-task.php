@@ -14,7 +14,7 @@
 		<?php
 			include_once "res/partials/head.php";
 		?>
-		<title>Proofreadr - For all your grammar needs</title>
+		<title>My Tasks</title>
 		<meta name="description" content="">
 	</head>
 	<body>
@@ -41,33 +41,49 @@
 											if (!(isset($_SESSION['username']) || isCookieValid($GLOBALS['pdo'])))
                                        			redirectTo('index');
                                        		elseif (isset($_GET['id']))
-											{
-												$id = $_GET['id'];
+                                       		{
+                                       			$user = $_SESSION['username'];
+                                       			$query = "SELECT score FROM Users WHERE user_id = $user";
+                                       			$id = $_GET['id'];
 
-												/*
-													-DECLARE PDO
-													-CREATE CONNECTION
-													-RETRIEVE DATA FOR THIS POST
-													-PRESENT ON PAGE
-													-GIVE OPTION TO CLAIM TASK
-													-IF MOD, GIVE OPTION TO FLAG TASK
-												*/
+                                       			// Check score first to make sure user can actually access this page
+						                        foreach ($GLOBALS['pdo'] -> query($query) as $score)
+						                            if ($score['score'] < 40)
+						                                redirectTo('home');
 
+						                        // User's score is above 40, so continue retrieving task details
+                                       			$query = "SELECT task_id FROM Tasks WHERE task_id = $id;";
+                                       			$value = array();
+                                       			// Check to make sure the task actually exists
+                                       			foreach ($GLOBALS['pdo'] -> query($query) as $task)
+													if (sizeof($task) < 1)
+														redirectTo('flagged-tasks');
+												// Task details
 												$title;
+												$author;
 												$type;
 												$description;
 												$claim_deadline;
 												$review_deadline;
+												$flagged_on;
+												$reason;
 												$words;
 												$pages;
+
+												// Query
+												$query = "SELECT Tasks.*, flagged_tasks.date_time, flagged_tasks.reason FROM Tasks INNER JOIN flagged_tasks ON Tasks.task_id = flagged_tasks.task_id AND Tasks.task_id = $id;";
+
 												// Retrieve Task details
-												foreach ($GLOBALS['pdo'] -> query("SELECT * FROM Tasks WHERE task_id = $id") as $task)
+												foreach ($GLOBALS['pdo'] -> query($query) as $task)
 												{
-													$test = $task['task_title'];
+													$title = $task['task_title'];
+													$author = $task['user_id'];
 													$type = $task['task_type'];
 													$description = $task['description'];
 													$claim_deadline = $task['claim_deadline'];
 													$review_deadline = $task['review_deadline']; # Not sure if needed?
+													$flagged_on = $task['date_time'];
+													$reason = $task['reason'];
 													$words = $task['word_length'];
 													$pages = $task['page_length'];
 												}
@@ -75,8 +91,8 @@
 												// Retrieve tags
 												$tag_values = getTaskTags($id);
 
-												echo "<div id=\"view-task\" class=\"task\"><br />";
-												echo "<h2 class=\"task-title\">$test</h2>";
+												echo "<div id=\"review-task\" class=\"task\"><br />";
+												echo "<h2 class=\"task-title\">$title</h2>";
 												echo "Claim deadline:  " . date("jS F, Y", strtotime($claim_deadline)) . "<br />";
 												echo "Review deadline:  " . date("jS F, Y", strtotime($review_deadline)) . "<br />";
 												echo "Type:  $type<br />";
@@ -88,19 +104,18 @@
 												for ($i = 0; $i < sizeof($tag_values); $i++)
 													echo "<li>".$tag_values[$i]."</li>";
 												echo "</ul>";
-												// Claim functionality
-												echo "<form id=\"claim-form\" action=\"res/utils/claim.php\" method=\"post\">";
-												echo "<input name=\"id\" type=\"hidden\" value=\"$id\"/>";
+												// Flag information
+												echo "<strong>Flagged on:  </strong>" . date("jS F, Y", strtotime($flagged_on)) . "<br />";
+												echo "<strong>Reason:</strong><br />";
+												echo "<p>$reason</p>";
+
 												echo	"<ul class=\"actions\">";
-												echo "<li><button type=\"submit\" id=\"claim\" class=\"button\">Claim</button></li>";
-												echo	"</form>";
-												// Preview functionality
-												echo "<li><a href=\"#\" class=\"button\">Preview</a></li>";
-												// Flag functionality
-												echo "<li><button id=\"flag\" type=\"button\" onClick=\"flagTask()\" class=\"button\">Flag</button></li>"; # NEED A CHECK ON SCORE HERE
+													// echo "<li><a href=\"#\" class=\"button\">View file</a></li>"; // Let the mod see file uploaded for task
+													echo "<li><button onClick=\"cancelTask()\" type=\"button\" class=\"button\">Unpublish</button></li>"; // Will unpublish task, but not ban user
+													echo "<li><button onClick=\"banAndUnpublish()\" type=\"button\" class=\"button\">Ban & Unpublish</button></li>"; // Will ban user and unpublish task
+													echo "<li><button onClick=\"unFlag()\" type=\"button\" class=\"button\">Unflag</button></li>"; // Unflag task, not inappropriate (removes score from flagger -2)
 												echo	"</ul>";
 												echo "</div>";
-												echo "<input id=\"task_id\" type=\"hidden\" value=\"$id\">";
 											}
 											else
 											{

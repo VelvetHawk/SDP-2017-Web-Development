@@ -14,7 +14,7 @@
 		<?php
 			include_once "res/partials/head.php";
 		?>
-		<title>Proofreadr - For all your grammar needs</title>
+		<title>My Tasks - Proofreadr</title>
 		<meta name="description" content="This should contain a description about this particular page">
 	</head>
 	<body>
@@ -36,7 +36,7 @@
 							<!-- Section -->
 								<section>
 									<header class="major">
-										<h2>Dashboard</h2>
+										<h2>My Tasks</h2>
 									</header>
                                     <?php if(!(isset($_SESSION['username']) || isCookieValid($GLOBALS['pdo']))): ?>
                                         <?php redirectTo('index'); ?>
@@ -49,12 +49,8 @@
 										<?php
 											try
 											{
-												$major = getUserMajor($_SESSION['username']);
-												$tasks_sameMajor = getStudentsInSameMajor($major, $_SESSION['username']);
-												$tasks_subscribed = getSubscribedTags($_SESSION['username']);
-												$tasks_assigned = getAssignedTags($_SESSION['username']);
-												$formatted_array = formatArrays($tasks_sameMajor, $tasks_subscribed, $tasks_assigned, $_SESSION['username']);
-												printTasks($formatted_array);
+												printMyTasks(getTasksByUser($_SESSION['username']));
+												# HAVE CHECK TO ADD REVIEW OPTION TO USER TO ALLOW THE TO GIVE FEEDBACK ONCE TASK IS COMPLETED
 											}
 											catch (Exception $e)
 											{

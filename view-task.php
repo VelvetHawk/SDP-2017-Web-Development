@@ -44,15 +44,6 @@
 											{
 												$id = $_GET['id'];
 
-												/*
-													-DECLARE PDO
-													-CREATE CONNECTION
-													-RETRIEVE DATA FOR THIS POST
-													-PRESENT ON PAGE
-													-GIVE OPTION TO CLAIM TASK
-													-IF MOD, GIVE OPTION TO FLAG TASK
-												*/
-
 												$title;
 												$type;
 												$description;
@@ -88,16 +79,10 @@
 												for ($i = 0; $i < sizeof($tag_values); $i++)
 													echo "<li>".$tag_values[$i]."</li>";
 												echo "</ul>";
-												// Claim functionality
-												echo "<form id=\"claim-form\" action=\"res/utils/claim.php\" method=\"post\">";
-												echo "<input name=\"id\" type=\"hidden\" value=\"$id\"/>";
 												echo	"<ul class=\"actions\">";
-												echo "<li><button type=\"submit\" id=\"claim\" class=\"button\">Claim</button></li>";
-												echo	"</form>";
-												// Preview functionality
-												echo "<li><a href=\"#\" class=\"button\">Preview</a></li>";
-												// Flag functionality
-												echo "<li><button id=\"flag\" type=\"button\" onClick=\"flagTask()\" class=\"button\">Flag</button></li>"; # NEED A CHECK ON SCORE HERE
+												echo 		"<li><button onClick=\"appendArea()\" class=\"button\">Mark as complete</button></li>";
+												echo 		"<li><a href=\"#\" class=\"button\">Request file</a></li>";
+												echo 		"<li><a id=\"\" href=\"#\" class=\"button\">Cancel</a></li>";
 												echo	"</ul>";
 												echo "</div>";
 												echo "<input id=\"task_id\" type=\"hidden\" value=\"$id\">";

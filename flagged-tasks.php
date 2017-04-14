@@ -36,7 +36,7 @@
 							<!-- Section -->
 								<section>
 									<header class="major">
-										<h2>Dashboard</h2>
+										<h2>Flagged Tasks</h2>
 									</header>
                                     <?php if(!(isset($_SESSION['username']) || isCookieValid($GLOBALS['pdo']))): ?>
                                         <?php redirectTo('index'); ?>
@@ -49,12 +49,7 @@
 										<?php
 											try
 											{
-												$major = getUserMajor($_SESSION['username']);
-												$tasks_sameMajor = getStudentsInSameMajor($major, $_SESSION['username']);
-												$tasks_subscribed = getSubscribedTags($_SESSION['username']);
-												$tasks_assigned = getAssignedTags($_SESSION['username']);
-												$formatted_array = formatArrays($tasks_sameMajor, $tasks_subscribed, $tasks_assigned, $_SESSION['username']);
-												printTasks($formatted_array);
+												printFlaggedTasks(getFlaggedTasks());
 											}
 											catch (Exception $e)
 											{
