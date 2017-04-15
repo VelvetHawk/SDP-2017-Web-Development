@@ -104,6 +104,26 @@
                                                 <label for="passwordField">Confirm Password</label>
                                                 <input type="password" class="form-control showpassword" name="confirm_password" id="passwordField" placeholder="Password">
                                             </div>
+<<<<<<< HEAD
+=======
+                                            <div class="12u$">
+                                                <!-- SECRET QUESTION -->
+                                                <div class="select-wrapper more-padding">
+                                                    <label for="secretQuestionField">Secret Question (Required for forgotten password)</label>
+                                                    <select name="secretQuestion" id="secretQuestionField">
+                                                        <option value="">- Secret Question -</option>
+                                                        <option value="Mothers maiden name">Mothers maiden name</option>
+                                                        <option value="Name of town where you were born">Name of town where you were born</option>
+                                                        <option value="Name of first pet">Name of first pet</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <!-- SECRET ANSWER -->
+                                                <label for="secretAnswerField">Secret Answer</label>
+                                                <input type="password" class="form-control" name="secretAnswer" id="secretAnswerField" placeholder="Secret Answer">
+                                            </div>
+>>>>>>> e2572922f9c83c139d5ccde39c0e0d881d2b845a
                                             <!-- reCaptcha -->
 											<!-- server: 6LdyxRwUAAAAABjSfPgo3NTV2K3Y3-QGo85XD-0N
 												local: 6LfnihwUAAAAABIYB6AsjdrQ_ryFn-3DKaQPDfXn

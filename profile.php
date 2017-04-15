@@ -44,7 +44,11 @@ include_once "res/partials/parseProfile.php";
                         Not yet a member? <a href="signup.php">Sign up here</a><br>
                     </p>-->
                 <?php else: ?>
+<<<<<<< HEAD
                     <img src="<?php if(isset($profile_picture)) echo $profile_picture ?>" class="img img-rounded" width="200"><br><br>
+=======
+                    <img src="<?php if(isset($profile_picture)) echo $profile_picture ?>" class="img img-rounded" width="200">
+>>>>>>> e2572922f9c83c139d5ccde39c0e0d881d2b845a
 
                 <table class="table table-bordered table-condensed">
                     <!-- username retrieved from parseProfile -->
@@ -54,6 +58,11 @@ include_once "res/partials/parseProfile.php";
                     <!-- sending user_identity paramemter into url-->
                     <tr><th></th><td><a class="pull-right" href="edit-profile.php?user_identity=<?php if(isset($encode_id)) echo $encode_id; ?>">
                                 <span class="glyphicon glyphicon-edit"></span>Edit Profile</a></td></tr>
+<<<<<<< HEAD
+=======
+                    <tr><th></th><td><a class="pull-right" href="update-password.php?user_identity=<?php if(isset($encode_id)) echo $encode_id; ?>">
+                                <span class="glyphicon glyphicon-edit"></span>Change Password</a></td></tr>
+>>>>>>> e2572922f9c83c139d5ccde39c0e0d881d2b845a
                 </table>
                 <?php endif ?>
             </section>

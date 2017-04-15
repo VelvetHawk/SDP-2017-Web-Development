@@ -720,6 +720,7 @@
 	    }
 	    return false;
 	}
+<<<<<<< HEAD
 	function isUserBanned($user) {
 
 	    $isBanned = false;
@@ -732,5 +733,7 @@
 
         return $isBanned;
     }
+=======
+>>>>>>> e2572922f9c83c139d5ccde39c0e0d881d2b845a
 	
 ?>

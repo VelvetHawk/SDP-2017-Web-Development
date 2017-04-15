@@ -60,6 +60,7 @@ include_once "res/partials/parseChangePassword.php";
                                 <?php if(!empty($form_errors)) echo show_errors($form_errors); ?>
                             </div>
                         <!-- need to let server know sending file-->
+<<<<<<< HEAD
                             <form method="post" action="res/partials/parseProfile.php" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label for="emailField">Email</label>
@@ -116,6 +117,32 @@ include_once "res/partials/parseChangePassword.php";
                                     </ul>
                                 </div>
                             </form>
+=======
+                        <form method="post" action="res/partials/parseProfile.php" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="emailField">Email</label>
+                                <input type="text" name="email" class="form-control" id="emailField" value="<?php if(isset($email)) echo $email; ?>">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="usernameField">Username</label>
+                                <input type="text" name="username" class="form-control" id="usernameField" value="<?php if(isset($username)) echo $username; ?>">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="fileField">Avatar</label>
+                                <input type="file" name="fileToUpload" id="fileField">
+                            </div>
+
+                            <input type="hidden" name="hidden_id" value="<?php if(isset($id)) echo $id; ?>">
+                            <input type="hidden" name="token" value="<?php if(function_exists('_token')) echo _token(); ?>">
+                            <div class="12u$">
+                                <ul class="actions button-float-right">
+                                    <li><button name="updateProfileButton" type="submit" value="Submit" class="special">Update Profile</button></li>
+
+                                </ul>
+                            </div>
+>>>>>>> e2572922f9c83c139d5ccde39c0e0d881d2b845a
                         <p><a href="home.php">Back</a></p>
                         <?php endif ?>
 
