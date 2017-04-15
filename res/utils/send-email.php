@@ -15,7 +15,7 @@ $mail->isSMTP();
 // 0 = off (for production use)
 // 1 = client messages
 // 2 = client and server messages
-$mail->SMTPDebug = 2;
+//$mail->SMTPDebug = 2;
 //Ask for HTML-friendly debug output
 $mail->Debugoutput = 'html';
 //Set the hostname of the mail server
@@ -34,11 +34,10 @@ $mail->Username = "dubley90@gmail.com";
 //Password to use for SMTP authentication
 $mail->Password = "xybfxscmfiuzwmxh";
 //Set who the message is to be sent from
-$mail->setFrom('dubley90@gmail.com', 'First Last');
+$mail->setFrom('dubley90@gmail.com', 'Brian Dooley');
 //Set an alternative reply-to address
 //$mail->addReplyTo('replyto@example.com', 'First Last');
 //Set who the message is to be sent to
-$mail->addAddress('sdpabj2017@gmail.com', 'John Doe');
 //Set the subject line
 $mail->Subject = 'PHPMailer GMail SMTP test';
 //Read an HTML message body from an external file, convert referenced images to embedded,
@@ -46,11 +45,13 @@ $mail->Subject = 'PHPMailer GMail SMTP test';
 //$mail->msgHTML(file_get_contents('contents.html'), dirname(__FILE__));
 //Replace the plain text body with one created manually
 $mail->Body = 'if this works then good';
+
+$mail->IsHTML(true);
 //Attach an image file
 //$mail->addAttachment('images/phpmailer_mini.png');
 //send the message, check for errors
-if (!$mail->send()) {
+/*if (!$mail->send()) {
     echo "Mailer Error: " . $mail->ErrorInfo;
 } else {
     echo "Message sent!";
-}
+}*/

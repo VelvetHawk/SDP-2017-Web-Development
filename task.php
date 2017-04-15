@@ -1,5 +1,6 @@
 <?php
-	include_once "utils/Functions.php";
+	include_once "res/utils/Functions.php";
+	//initialiseConnection();
 ?> 
 
 <!DOCTYPE HTML>
@@ -10,15 +11,11 @@
 -->
 <html lang="en">
 	<head>
+		<?php
+			include_once "res/partials/head.php";
+		?>
 		<title>Proofreadr - For all your grammar needs</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
-		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-		<meta name="description" content="This should contain a description about this particular page">
-		<script src="#"></script>
+		<meta name="description" content="">
 	</head>
 	<body>
 
@@ -32,7 +29,7 @@
 							<!-- Header -->
 								<header id="header">
 									<?php
-										include_once "utils/Header.php";
+										include_once "res/partials/Header.php";
 									?>
 								</header>
 
@@ -41,9 +38,10 @@
 									<!-- Task information -->
 									<div class="posts">
 										<?php
-											if (isset($_GET['id']))
+											if (!(isset($_SESSION['username']) || isCookieValid($GLOBALS['pdo'])))
+                                       			redirectTo('index');
+                                       		elseif (isset($_GET['id']))
 											{
-												initialiseConnection();
 												$id = $_GET['id'];
 
 												/*
@@ -56,35 +54,60 @@
 												*/
 
 												$title;
+												$type;
 												$description;
-												// Retrieve Title, Description
-												foreach ($GLOBALS['dbh'] -> query("SELECT * FROM Tasks WHERE task_id = $id") as $task)
+												$claim_deadline;
+												$review_deadline;
+												$words;
+												$pages;
+												// Retrieve Task details
+												foreach ($GLOBALS['pdo'] -> query("SELECT * FROM Tasks WHERE task_id = $id") as $task)
 												{
 													$test = $task['task_title'];
+													$type = $task['task_type'];
 													$description = $task['description'];
+													$claim_deadline = $task['claim_deadline'];
+													$review_deadline = $task['review_deadline']; # Not sure if needed?
+													$words = $task['word_length'];
+													$pages = $task['page_length'];
 												}
 
-												$tags = array();
 												// Retrieve tags
-												// foreach ($GLOBALS['dbh'] -> query("SELECT * FROM Tasks WHERE task_id = $id") as $tag)
-												// {
-												// 	# code...
-												// 	array_push($tags, $tag['value']);
-												// }
+												$tag_values = getTaskTags($id);
 
-												echo "<div class=\"task\"><br />";
-												echo "<h2>$test</h2><br />";
-												echo "<br />";
-												echo "<p>$description</p><br />";
-												echo "Tag 1, tag 2, tag 3, tag 4<br /><br />";
+												echo "<div id=\"view-task\" class=\"task\"><br />";
+												echo "<h2 class=\"task-title\">$test</h2>";
+												echo "Claim deadline:  " . date("jS F, Y", strtotime($claim_deadline)) . "<br />";
+												echo "Review deadline:  " . date("jS F, Y", strtotime($review_deadline)) . "<br />";
+												echo "Type:  $type<br />";
+												echo "Words:  $words<br />Pages:  $pages<br />";
+												echo "<br /><br />";
+												echo "<p>$description</p>";
+												// print_r($tag_values);
+												echo "<ul class=\"tag-list\">";
+												for ($i = 0; $i < sizeof($tag_values); $i++)
+													echo "<li>".$tag_values[$i]."</li>";
+												echo "</ul>";
+												// Claim functionality
+												echo "<form id=\"claim-form\" action=\"res/utils/claim.php\" method=\"post\">";
+												echo "<input name=\"id\" type=\"hidden\" value=\"$id\"/>";
 												echo	"<ul class=\"actions\">";
-												echo "<li><a href=\"#\" class=\"button\">Claim</a></li>";
-												echo "<li><a href=\"#\" class=\"button\">Flag</a></li>";
+												echo "<li><button type=\"submit\" id=\"claim\" class=\"button\">Claim</button></li>";
+												echo	"</form>";
+												// Preview functionality
+												echo "<li><a href=\"#\" class=\"button\">Preview</a></li>";
+												// Flag functionality
+												echo "<li><button id=\"flag\" type=\"button\" onClick=\"flagTask()\" class=\"button\">Flag</button></li>"; # NEED A CHECK ON SCORE HERE
 												echo	"</ul>";
 												echo "</div>";
+												echo "<input id=\"task_id\" type=\"hidden\" value=\"$id\">";
 											}
 											else
-												echo "ID not set";
+											{
+												// This will redirect to home.php when no task id is sent to task.php
+												redirectTo('home');
+												// echo "ID not set";
+											}
 										?>
 									</div>
 								</section>
@@ -94,16 +117,14 @@
 
 				<!-- Sidebar -->
 					<?php
-						include_once "utils/Sidebar.php";
+						include_once "res/utils/Sidebar.php";
 					?>
 			</div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="assets/js/main.js"></script>
+		<?php
+			include_once "res/partials/script-calls.php";
+		?>
 
 	</body>
 </html>

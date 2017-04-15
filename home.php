@@ -1,5 +1,6 @@
 <?php
-	include_once "utils/Functions.php";
+    $page_title = "Homepage";
+	include_once "res/utils/Functions.php";
 ?> 
 
 <!DOCTYPE HTML>
@@ -10,15 +11,11 @@
 -->
 <html lang="en">
 	<head>
+		<?php
+			include_once "res/partials/head.php";
+		?>
 		<title>Proofreadr - For all your grammar needs</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
-		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 		<meta name="description" content="This should contain a description about this particular page">
-		<script src="#"></script>
 	</head>
 	<body>
 
@@ -32,7 +29,7 @@
 							<!-- Header -->
 								<header id="header">
 									<?php
-										include_once "utils/Header.php";
+										include_once "res/partials/Header.php";
 									?>
 								</header>
 
@@ -41,31 +38,45 @@
 									<header class="major">
 										<h2>Dashboard</h2>
 									</header>
-
+                                    <?php if(!(isset($_SESSION['username']) || isCookieValid($GLOBALS['pdo']))): ?>
+                                        <?php redirectTo('index'); ?>
+                                    <!--<p class="lead">You are currently not signed in<br><a href="login.php">Login</a><br>
+                                        Not yet a member? <a href="signup.php">Sign up here</a><br>
+                                    </p>-->
+                                    <?php else: ?>
 									<!-- Posts -->
 									<div class="posts">
 										<?php
-											initialiseConnection();
-											getTasksForCurrentUser();
+											try
+											{
+												$major = getUserMajor($_SESSION['username']);
+												$tasks_sameMajor = getStudentsInSameMajor($major, $_SESSION['username']);
+												$tasks_subscribed = getSubscribedTags($_SESSION['username']);
+												$tasks_assigned = getAssignedTags($_SESSION['username']);
+												$formatted_array = formatArrays($tasks_sameMajor, $tasks_subscribed, $tasks_assigned, $_SESSION['username']);
+												printTasks($formatted_array);
+											}
+											catch (Exception $e)
+											{
+												// Later on, fix this to not be error but general message
+												echo "<p class=\"error\">" . $e -> getMessage() ."</p>";
+											}
 										?>
-									</div>
-								</section>
 
+									</div>
+                                    <?php endif ?>
+								</section>
 						</div>
 					</div>
-
 				<!-- Sidebar -->
 					<?php
-						include_once "utils/Sidebar.php";
+						include_once "res/utils/Sidebar.php";
 					?>
 			</div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="assets/js/main.js"></script>
-
+			<?php
+				include_once "res/partials/script-calls.php";
+			?>
 	</body>
 </html>
