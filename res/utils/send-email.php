@@ -38,10 +38,6 @@ $mail->setFrom('dubley90@gmail.com', 'Brian Dooley');
 //Set an alternative reply-to address
 //$mail->addReplyTo('replyto@example.com', 'First Last');
 //Set who the message is to be sent to
-<<<<<<< HEAD
-=======
-$mail->addAddress('sdpabj2017@gmail.com', 'John Doe');
->>>>>>> e2572922f9c83c139d5ccde39c0e0d881d2b845a
 //Set the subject line
 $mail->Subject = 'PHPMailer GMail SMTP test';
 //Read an HTML message body from an external file, convert referenced images to embedded,
@@ -49,11 +45,8 @@ $mail->Subject = 'PHPMailer GMail SMTP test';
 //$mail->msgHTML(file_get_contents('contents.html'), dirname(__FILE__));
 //Replace the plain text body with one created manually
 $mail->Body = 'if this works then good';
-<<<<<<< HEAD
 
 $mail->IsHTML(true);
-=======
->>>>>>> e2572922f9c83c139d5ccde39c0e0d881d2b845a
 //Attach an image file
 //$mail->addAttachment('images/phpmailer_mini.png');
 //send the message, check for errors

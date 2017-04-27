@@ -471,7 +471,7 @@
 	    $form_errors = array();
 
 	    foreach($fields_to_check_length as $name_of_field => $minimum_length_required) {
-	        if(strlen(trim($_POST[$name_of_field])) < $minimum_length_required) {
+	        if (strlen(trim($_POST[$name_of_field])) < $minimum_length_required) {
 	            $form_errors[] = $name_of_field . " is too short, must be {$minimum_length_required} characters long";
 	        }
 	    }
@@ -514,8 +514,12 @@
 
 	    // Loop through error array and display all the items in a list
 	    foreach($form_errors_array as $the_error) {
-	        $errors .= "<li> {$the_error} </li>";
-
+	    	$original = "<li> {$the_error} </li>";
+	    	$pos = strrpos($original, "_");
+	    	if ($pos == 0)
+	    		$errors .= $original;
+	    	else
+		    	$errors .= substr_replace($original," ", $pos, 1);
 	    }
 	    $errors .= "</ul></div>";
 	    return $errors;
@@ -627,12 +631,10 @@
 	    unset($_SESSION['username']);
 	    //unset($_SESSION['id']);
 
-        // KEEP THIS COMMENTED OUT
-        //**************************
-	    //if(isset($_COOKIE['rememberUserCookie'])) {
-	    //    unset($_COOKIE['rememberUserCookie']);
-        //   setcookie('rememberUserCookie', null, -1, '/');
-	    //}
+	    if(isset($_COOKIE['rememberUserCookie'])) {
+	       unset($_COOKIE['rememberUserCookie']);
+          setcookie('rememberUserCookie', null, -1, '/');
+	    }
 	    session_destroy();
 	    session_regenerate_id(true);
 	    redirectTo('index');
@@ -720,7 +722,6 @@
 	    }
 	    return false;
 	}
-<<<<<<< HEAD
 	function isUserBanned($user) {
 
 	    $isBanned = false;
@@ -733,7 +734,5 @@
 
         return $isBanned;
     }
-=======
->>>>>>> e2572922f9c83c139d5ccde39c0e0d881d2b845a
 	
 ?>

@@ -11,4 +11,4 @@
 <!--[if lte IE 8]><script src="res/js/ie/respond.min.js"></script><![endif]-->
 <script src="res/js/main.js"></script>
 <!-- My JS file -->
-<script type="text/javascript" src="res/js/custom.js"></script>
+<script type="text/javascript" src="res/js/custom.js?"></script>

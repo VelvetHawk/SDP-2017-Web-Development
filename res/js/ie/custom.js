@@ -202,61 +202,6 @@ function unclaimTask(task_number)
     form.submit();
 }
 
-// Appends rate task section below
-function rateTask()
-{
-	if (append && document.getElementById("manage-task") != null)
-	{
-		append = false;
-		var form = document.createElement('form');
-		form.method = "post";
-		form.action = "res/utils/rate.php";
-
-		var button_1 = document.createElement('input');
-		button_1.setAttribute("type", "radio");
-		button_1.setAttribute("id", "happy");
-		button_1.setAttribute("name", "rating");
-		button_1.setAttribute("value", "true");
-
-		var button_2 = document.createElement('input');
-		button_2.setAttribute("type", "radio");
-		button_2.setAttribute("id", "unhappy");
-		button_2.setAttribute("name", "rating");
-		button_2.setAttribute("value", "false");
-
-		var id = document.createElement('input');
-		id.setAttribute("type", "hidden");
-		id.setAttribute("name", "id");
-		id.setAttribute("value", getTaskId());
-
-		var happy = document.createElement("label");
-		happy.setAttribute("for", "happy");
-		happy.innerHTML = "<strong>Happy</strong>";
-
-		var unhappy = document.createElement("label");
-		unhappy.setAttribute("for", "unhappy");
-		unhappy.innerHTML = "<strong>Unhappy</strong>";
-
-		var submit_button = document.createElement('button');
-		submit_button.setAttribute('class', 'button');
-		submit_button.innerHTML = "Send review";
-
-		form.appendChild(button_1);
-		form.appendChild(happy);
-		form.appendChild(document.createElement('br'));
-		form.appendChild(button_2);
-		form.appendChild(unhappy);
-
-		form.appendChild(document.createElement('br'));
-		form.appendChild(id);
-		form.appendChild(submit_button);
-
-		// Happy is checked by default
-		form.rating.value = "true";
-		document.getElementById("manage-task").appendChild(form);
-	}
-}
-
 
 // Called upon page loading
 var id = getIdFromCookie();

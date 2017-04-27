@@ -18,14 +18,4 @@
 		$query = "UPDATE `sessions` SET `last_active` = 0 WHERE user_id = $id";
 		$GLOBALS['pdo'] -> query($query);
 	}
-
-	/*
-		- Add a new column (last_active) to  sessions which is currently changing (increments from 0 -> 1 -> 2)
-		- Create event that checks every minute if the last_active value is 2 (last_active represents minutes since last ping)
-			: If 2, move session to total_sessions and use Now() as logout date
-			: Otherwise, leave as is
-		- Create even that increments the still_active column of every session
-		- Let php script reset value to 0 each minute, showing user is still connected
-
-	*/
 ?>

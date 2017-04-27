@@ -110,20 +110,13 @@
                     $encode_id = base64_encode("encodeuserid{$username}");
 
                     // prepare email body
-<<<<<<< HEAD
                     //  set $mail-IsHTML(true);
-=======
->>>>>>> e2572922f9c83c139d5ccde39c0e0d881d2b845a
                     $mail_body = '<html>
                     <body style="background-color:#CCCCCC; color:#000; font-family Arial, Helvetica, sans-serif
                     line-height:1.8em;">
-                    <h2>User Authentication: Code A Secured Login System</h2>
+                    <h2>Proofreadr Password Recovery</h2>
                     <p>Dear '.$first_name.'<br><br>to reset your password, please click on the link below</p>
-<<<<<<< HEAD
-                    <p><a href="http://localhost/btest/forgot_password.php?id='.$encode_id.'">Reset Password</a></p>
-=======
-                    <p><a href="http://localhost/thebest/forgot_password.php?id='.$encode_id.'">Reset Password</a></p>
->>>>>>> e2572922f9c83c139d5ccde39c0e0d881d2b845a
+                    <p><a href="http://localhost/SDP-2017/forgot_password.php?id='.$encode_id.'">Reset Password</a></p>
                     </body>
                     </html>';
 

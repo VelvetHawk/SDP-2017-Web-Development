@@ -10,8 +10,10 @@
     		$task_id = $_POST['task'];
     		$user = $_SESSION['username'];
             $query = "DELETE FROM flagged_tasks WHERE task_id = $task_id";
-            // Don't forget to work on score changes
     		$GLOBALS['pdo'] -> query($query);
+            // Update score: -3 for a mod unflagging your task
+            $query = "UPDATE Users SET score = score - 3 WHERE user_id = $user";
+            $GLOBALS['pdo'] -> query($query);
     	}
     	redirectTo('../../flagged-tasks');
     }

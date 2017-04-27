@@ -5,7 +5,7 @@
 any other head content must come *after* these tags -->
 <!-- <title><?php if(isset($page_title)) echo $page_title; ?></title> REMOVE LATER MAYBE? --> 
 <!-- Bootstrap -->
-<link href="res/css/bootstrap.min.css" rel="stylesheet">
+<link href="res/css/bootstrap.min.css?<?php echo time(); ?>" rel="stylesheet">
 <link href="res/css/bootstrap.css?<?php echo time(); ?>" rel="stylesheet">
 <!-- <link rel="stylesheet" href="css/custom.css"> IF NOTHING BREAKS, DELETE THIS LINE LATER -->
 <!-- http://t4t5.github.io/sweetalert/ BEAUTIFUL POPUPS-->
