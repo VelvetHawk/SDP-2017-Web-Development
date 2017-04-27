@@ -1,13 +1,10 @@
 <?php
     $page_title = "User Authentication";
     include_once "res/utils/Functions.php";
-<<<<<<< HEAD
 
     // ALTER TABLE `users` ADD `activated` ENUM('0','1') NOT NULL DEFAULT '0' AFTER `score`, ADD `avatar` VARCHAR(255) NOT NULL AFTER `activated`, ADD `reset_link` VARCHAR(255) NOT NULL AFTER `avatar`;
 
 
-=======
->>>>>>> e2572922f9c83c139d5ccde39c0e0d881d2b845a
 ?>
 <!DOCTYPE HTML>
 <!--

@@ -34,30 +34,44 @@ include_once 'res/partials/parseLogin.php';
                 ?>
             </header>
 
-            <!-- Section -->
-            <section>
-                <div class="container flag">
+
+                <section>
                     <header class="major">
                         <h2>About</h2>
                     </header>
-                    <form action="upload.php" method="post" enctype="multipart/form-data">
-                        Select image to upload:
-                        <input type="file" name="fileToUpload" id="fileToUpload">
-                        <input type="submit" value="Upload Image" name="submit">
-                    </form>
-                    <!--
+                    <div class="posts">
+                        <article>
+                            <!-- <a href="#" class="image"><img src="images/pic01.jpg" alt="" /></a> -->
+                            <h3>The Idea</h3>
+                            <p>Proofreadr is a community founded in Ireland by Artem, Brian and James.
+                                Unlike other services available we are entirely subscription and cost free.
+                                Each day our community and user base grows.
+                                Why is this good for you? Because as the community grows the variety of subjects covered grows too!</p>
+                        </article>
+                        <article>
+                            <h3>Our Location</h3>
+                            <p>Our offices are located in the University of Limerick with all servers hosted on site on the testweb3 server.
+                                Located on the banks of the scenic river shannon in Limerick City, Ireland.</p>
+                        </article>
+                        <article>
+                            <h2>The Team</h2>
+                            <h3>Artem Semenov</h3>
+                            <p>Co-Founder and Developer. ID: 15164748 </p>
+                            <h3>Brian Dooley</h3>
+                            <p>Co-Founder and Developer. ID: 15123529 </p>
+                            <h3>James Gillatt-Haughton</h3>
+                            <p>Co-Founder and Developer. ID: 15157776 </p>
+                        </article>
 
+                    </div>
+                </section>
 
-
-                    WHATEVER GOES HERE
-
-
-                    -->
-                </div>
-            </section>
 
         </div>
     </div>
+    <?php
+    include_once "res/utils/Sidebar.php";
+    ?>
 </div>
 
 <!-- Scripts -->

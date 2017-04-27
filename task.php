@@ -44,14 +44,60 @@
 											{
 												$id = $_GET['id'];
 
-												/*
-													-DECLARE PDO
-													-CREATE CONNECTION
-													-RETRIEVE DATA FOR THIS POST
-													-PRESENT ON PAGE
-													-GIVE OPTION TO CLAIM TASK
-													-IF MOD, GIVE OPTION TO FLAG TASK
-												*/
+												// Add the tasks for this task to the user's profile
+												$tags;
+												foreach ($GLOBALS['pdo'] -> query("SELECT tags FROM Tasks WHERE task_id = $id;") as $tag_list)
+													$tags = explode(",", $tag_list['tags']);
+												// Tags
+												$assigned_tags;
+												foreach ($GLOBALS['pdo'] -> query("SELECT tags FROM assigned_tags WHERE user_id = " . $_SESSION['username'] . ";") as $tag_list)
+													$assigned_tags = explode(",", $tag_list['tags']);
+												// Frequencies
+												$frequencies;
+												foreach ($GLOBALS['pdo'] -> query("SELECT frequencies FROM assigned_tags WHERE user_id = " . $_SESSION['username'] . ";") as $tag_list)
+													$frequencies = array_map('intval', explode(",", $tag_list['frequencies']));
+
+												if (!isset($assigned_tags))
+													$assigned_tags = array();
+												// Check if user actually has viewed a task before
+												if (sizeof($assigned_tags) == 0 || $assigned_tags[0] == '')
+												{
+													unset($assigned_tags);
+													unset($frequencies);
+													for ($i = 0; $i < sizeof($tags); $i++)
+														$assigned_tags[$i] = $tags[$i];
+													for ($i = 0; $i < sizeof($tags); $i++)
+														$frequencies[$i] = 1;
+
+													// Update DB
+													$GLOBALS['pdo'] -> query("UPDATE assigned_tags SET tags = '" . implode(",", $assigned_tags) . "';");
+													$GLOBALS['pdo'] -> query("UPDATE assigned_tags SET frequencies = '" . implode(",", $frequencies) . "';");
+												}
+												else // Take tags from current task, and add them to user's assigned tags
+												{
+													$count;
+													for ($i = 0; $i < sizeof($tags); $i++) // Loop through tags in task
+													{
+														$added = false;
+														for ($j = 0; $j < sizeof($assigned_tags) && !$added; $j++) // Loop through all assigned tags
+														{
+															if ($tags[$i] == $assigned_tags[$j]) // Check if profile tag is within list of tags for task
+															{
+																$frequencies[$j]++; // Increment the occurence of this tag
+																$added = true;
+															}
+														}
+														// Check if user already has this tag in their assigned tags - If not, at it to their assigned tags
+														if (!$added)
+														{
+															$assigned_tags[sizeof($assigned_tags)] = $tags[$i]; // Append tag_id to assigned tags
+															$frequencies[sizeof($assigned_tags)] = 1; // Set frequency to 1
+														}
+													}
+													// Query to DB
+													$GLOBALS['pdo'] -> query("UPDATE assigned_tags SET tags = '" . implode(",", $assigned_tags) . "';");
+													$GLOBALS['pdo'] -> query("UPDATE assigned_tags SET frequencies = '" . implode(",", $frequencies) . "';");
+												}
 
 												$title;
 												$type;

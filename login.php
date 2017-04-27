@@ -88,9 +88,11 @@ echo 'wrappers: ', var_export($w); */
 											<!-- server: 6LdyxRwUAAAAABjSfPgo3NTV2K3Y3-QGo85XD-0N
 												local: 6LfnihwUAAAAABIYB6AsjdrQ_ryFn-3DKaQPDfXn
 											-->
-                                            <?php if (isset($GLOBALS['logins']) && $GLOBALS['logins'] == true)
-                                                echo "<div class=\"g-recaptcha\" data-theme=\"light\" data-sitekey=\"6LfnihwUAAAAABIYB6AsjdrQ_ryFn-3DKaQPDfXn\"></div>";
-                                            ?>
+                                            <?php /*if (isset($GLOBALS['logins']) && $GLOBALS['logins'] == true)
+                                                echo "<div class=\"g-recaptcha-response\" data-theme=\"light\" data-sitekey=\"6LfnihwUAAAAABIYB6AsjdrQ_ryFn-3DKaQPDfXn\"></div>";
+                                            */?>
+                                            <!-- local key 6LdEER4UAAAAAAXZr1D9U2Z_JhHCeo6JyVAt_R2R -->
+                                            <div class="g-recaptcha" data-sitekey="6LdEER4UAAAAAAXZr1D9U2Z_JhHCeo6JyVAt_R2R"></div>
                                             <input type="hidden" name="token" value="<?php echo _token(); ?>">
                                             <div class="12u$">
                                                 <ul class="actions button-float-right">

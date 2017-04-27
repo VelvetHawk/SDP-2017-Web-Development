@@ -77,7 +77,7 @@
 
 												$status = getTaskStatus($_GET['id']);
 
-												echo "<div class=\"task\"><br />";
+												echo "<div id=\"manage-task\" class=\"task\"><br />";
 												echo "<h2 class=\"task-title\">$test</h2>";
 												echo "Claim deadline:  " . date("jS F, Y", strtotime($claim_deadline)) . "<br />";
 												echo "Review deadline:  " . date("jS F, Y", strtotime($review_deadline)) . "<br />";
@@ -98,13 +98,14 @@
 													echo "<li>".$tag_values[$i]."</li>";
 												echo "</ul>";
 												echo	"<ul class=\"actions\">";
-												if ($status == "Completed")
-													echo "<li><a href=\"#\" class=\"button\">Rate</a></li>"; // FIX ABILITY TO RATE COMPLETED TASK
-												elseif ($status != "Claimed") // Make sure that if task is claimed, owner can't do anything
-												{
+												$query = "SELECT rated FROM tasks WHERE task_id = $id";
+												$rated;
+												foreach ($GLOBALS['pdo'] -> query($query) as $rating)
+													$rated = $rating['rated'];
+												if ($status == "Completed" && !$rated)
+													echo "<li><button type=\"button\" onClick=\"rateTask()\" class=\"button\">Rate</button></li>"; // FIX ABILITY TO RATE COMPLETED TASK
+												elseif ($status != "Claimed" && !$rated) // Make sure that if task is claimed, owner can't do anything
 													echo "<li><button onClick=\"cancelTask()\" type=\"button\" class=\"button\">Unpublish</button></li>";
-													echo "<li><a href=\"#\" class=\"button\">Edit</a></li>";
-												}
 												/*
 													GOING TO NEED TO BE A RATING BUTTON INSTEAD OF EDIT/UNPUBLISH IF TASK IS COMPLETED
 												*/

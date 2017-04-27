@@ -15,8 +15,9 @@ include_once "res/utils/Functions.php";
     ?>
     <title>Proofreadr - For all your grammar needs</title>
     <meta name="description" content="This should contain a description about this particular page">
+    <script src="res/js/profile-tags.js"></script>
 </head>
-<body>
+<body onload="addOnClick()">
 
 <!-- Wrapper -->
 <div id="wrapper">
@@ -44,6 +45,7 @@ include_once "res/utils/Functions.php";
                         Not yet a member? <a href="signup.php">Sign up here</a><br>
                     </p>-->
                 <?php else: ?>
+                    <?php include_once "res/partials/parseTaskCreate.php" ?>
                 <div>
                     <?php if(isset($result)) echo $result; ?>
                     <?php if(!empty($form_errors)) echo show_errors($form_errors); ?>
@@ -67,15 +69,16 @@ include_once "res/utils/Functions.php";
                     <!-- date -->
                     <div class="form-group">
                         <label for="reviewDeadline">Review Deadline</label>
-                        <input class="form-control" type="date" id="reviewDeadline">
+                        <input class="form-control" name="review_deadline" min="<?=date('Y-m-d')?>" type="date" id="reviewDeadline">
                     </div>
                     <div class="form-group">
                         <label for="claimDeadline">Claim Deadline</label>
-                        <input class="form-control" type="date" id="claimDeadline">
+                        <input class="form-control" name="claim_deadline" min="<?=date('Y-m-d')?>" type="date" id="claimDeadline">
                     </div>
                     <div class="form-group">
-                        <label for="taskTags">Task Tags (Seperate with commas)</label>
-                        <input type="text" name="taskTags" class="form-control" id="taskTags" value="">
+                        <label for="entry-area">Your Tags - 4 maximum (Press Enter to add new tag fields)</label>
+                        <input type="hidden" name="taskTags" id="tags" value="0">
+                        <div id="entry-area" contenteditable="false" class="entry-area"></div>
                     </div>
                     <div class="form-group">
                         <label for="taskPageCount">Task Page Count</label>
@@ -130,5 +133,10 @@ include_once "res/utils/Functions.php";
 <?php
 include_once "res/partials/script-calls.php";
 ?>
+<script>
+    document.getElementById("entry-area").setAttribute("onmouseover", "mouseOn()");
+    document.getElementById("entry-area").setAttribute("onmouseout", "mouseOff()");
+    document.getElementById("updateProfileButton").setAttribute("onClick", "addTagsToSubmit()");
+</script>
 </body>
 </html>

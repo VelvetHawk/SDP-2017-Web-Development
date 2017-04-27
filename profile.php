@@ -40,31 +40,20 @@ include_once "res/partials/parseProfile.php";
                 </header>
                 <?php if(!(isset($_SESSION['username']) || isCookieValid($GLOBALS['pdo']))): ?>
                     <?php redirectTo('index'); ?>
-                    <!--<p class="lead">You are currently not signed in<br><a href="login.php">Login</a><br>
-                        Not yet a member? <a href="signup.php">Sign up here</a><br>
-                    </p>-->
                 <?php else: ?>
-<<<<<<< HEAD
                     <img src="<?php if(isset($profile_picture)) echo $profile_picture ?>" class="img img-rounded" width="200"><br><br>
-=======
-                    <img src="<?php if(isset($profile_picture)) echo $profile_picture ?>" class="img img-rounded" width="200">
->>>>>>> e2572922f9c83c139d5ccde39c0e0d881d2b845a
 
-                <table class="table table-bordered table-condensed">
-                    <!-- username retrieved from parseProfile -->
-                    <tr><th style="width: 20%;">Username</th><td><?php if(isset($username)) echo $username; ?></td></tr>
-                    <tr><th>Email:</th><td><?php if(isset($email)) echo $email; ?></td></tr>
-                    <tr><th>Date Joined:</th><td><?php if(isset($date_joined)) echo $date_joined; ?></td></tr>
-                    <!-- sending user_identity paramemter into url-->
-                    <tr><th></th><td><a class="pull-right" href="edit-profile.php?user_identity=<?php if(isset($encode_id)) echo $encode_id; ?>">
-                                <span class="glyphicon glyphicon-edit"></span>Edit Profile</a></td></tr>
-<<<<<<< HEAD
-=======
-                    <tr><th></th><td><a class="pull-right" href="update-password.php?user_identity=<?php if(isset($encode_id)) echo $encode_id; ?>">
-                                <span class="glyphicon glyphicon-edit"></span>Change Password</a></td></tr>
->>>>>>> e2572922f9c83c139d5ccde39c0e0d881d2b845a
-                </table>
-                <?php endif ?>
+                    <table class="table table-bordered table-condensed">
+                        <!-- username retrieved from parseProfile -->
+                        <tr><th style="width: 20%;">ID</th><td><?php echo $username; ?></td></tr>
+                        <tr><th>Email:</th><td><?php if(isset($email)) echo $email; ?></td></tr>
+                        <tr><th>Date Joined:</th><td><?php if(isset($date_joined)) echo $date_joined; ?></td></tr>
+                        <tr><th>Subscribed tags:</th><td><?php if (isset($subscribed) && $subscribed != "") echo $subscribed; else echo "None"?></td></tr>
+                        <!-- sending user_identity paramemter into url-->
+                        <tr><th></th><td><a class="pull-right" href="edit-profile.php?user_identity=<?php if(isset($encode_id)) echo $encode_id; ?>">
+                                    <span class="glyphicon glyphicon-edit"></span>Edit Profile</a></td></tr>
+                    </table>
+                    <?php endif ?>
             </section>
 
         </div>

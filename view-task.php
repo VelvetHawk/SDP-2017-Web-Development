@@ -82,7 +82,7 @@
 												echo	"<ul class=\"actions\">";
 												echo 		"<li><button onClick=\"appendArea()\" class=\"button\">Mark as complete</button></li>";
 												echo 		"<li><a href=\"#\" class=\"button\">Request file</a></li>";
-												echo 		"<li><a id=\"\" href=\"#\" class=\"button\">Cancel</a></li>";
+												echo 		"<li><button id=\"\" onClick=\"unclaimTask($id)\" href=\"#\" class=\"button\">Cancel</button></li>";
 												echo	"</ul>";
 												echo "</div>";
 												echo "<input id=\"task_id\" type=\"hidden\" value=\"$id\">";

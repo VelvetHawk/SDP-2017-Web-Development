@@ -1,5 +1,4 @@
 -- phpMyAdmin SQL Dump
-<<<<<<< HEAD
 -- version 4.5.1
 -- http://www.phpmyadmin.net
 --
@@ -7,15 +6,6 @@
 -- Generation Time: Apr 15, 2017 at 11:37 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
-=======
--- version 4.6.4
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: Apr 14, 2017 at 05:19 PM
--- Server version: 5.7.14
--- PHP Version: 5.6.25
->>>>>>> e2572922f9c83c139d5ccde39c0e0d881d2b845a
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -29,6 +19,9 @@ SET time_zone = "+00:00";
 --
 -- Database: `group17`
 --
+
+CREATE DATABASE group17;
+USE group17;
 
 DELIMITER $$
 --
@@ -113,11 +106,7 @@ INSERT INTO `assigned_tags` (`user_id`, `tags`, `frequencies`, `subscribed_tags`
 CREATE TABLE `banned` (
   `user_id` int(10) UNSIGNED NOT NULL,
   `banned_by` int(10) UNSIGNED NOT NULL,
-<<<<<<< HEAD
   `date_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-=======
-  `date_time` timestamp NOT NULL,
->>>>>>> e2572922f9c83c139d5ccde39c0e0d881d2b845a
   `reason` text COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -126,11 +115,7 @@ CREATE TABLE `banned` (
 --
 
 INSERT INTO `banned` (`user_id`, `banned_by`, `date_time`, `reason`) VALUES
-<<<<<<< HEAD
 (15164748, 15123529, '2017-04-15 19:40:23', 'Was a gobshite');
-=======
-(15123529, 15164748, '2017-04-14 17:17:06', 'Was a gobshite');
->>>>>>> e2572922f9c83c139d5ccde39c0e0d881d2b845a
 
 -- --------------------------------------------------------
 
@@ -141,11 +126,7 @@ INSERT INTO `banned` (`user_id`, `banned_by`, `date_time`, `reason`) VALUES
 CREATE TABLE `cancelled_tasks` (
   `task_id` int(10) UNSIGNED NOT NULL,
   `cancelled_by` int(10) UNSIGNED NOT NULL,
-<<<<<<< HEAD
   `time_cancelled` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-=======
-  `time_cancelled` timestamp NOT NULL
->>>>>>> e2572922f9c83c139d5ccde39c0e0d881d2b845a
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -164,11 +145,7 @@ INSERT INTO `cancelled_tasks` (`task_id`, `cancelled_by`, `time_cancelled`) VALU
 CREATE TABLE `claimed_tasks` (
   `task_id` int(10) UNSIGNED NOT NULL,
   `claimant` int(10) UNSIGNED NOT NULL,
-<<<<<<< HEAD
   `time_claimed` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-=======
-  `time_claimed` timestamp NOT NULL
->>>>>>> e2572922f9c83c139d5ccde39c0e0d881d2b845a
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -187,11 +164,7 @@ INSERT INTO `claimed_tasks` (`task_id`, `claimant`, `time_claimed`) VALUES
 CREATE TABLE `completed_tasks` (
   `task_id` int(10) UNSIGNED NOT NULL,
   `claimant` int(10) UNSIGNED NOT NULL,
-<<<<<<< HEAD
   `time_completed` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-=======
-  `time_completed` timestamp NOT NULL,
->>>>>>> e2572922f9c83c139d5ccde39c0e0d881d2b845a
   `review` text COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -204,11 +177,7 @@ CREATE TABLE `completed_tasks` (
 CREATE TABLE `flagged_tasks` (
   `task_id` int(10) UNSIGNED NOT NULL,
   `flagged_by` int(10) UNSIGNED NOT NULL,
-<<<<<<< HEAD
   `date_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-=======
-  `date_time` timestamp NOT NULL,
->>>>>>> e2572922f9c83c139d5ccde39c0e0d881d2b845a
   `reason` text COLLATE utf8_unicode_ci
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -220,11 +189,7 @@ CREATE TABLE `flagged_tasks` (
 
 CREATE TABLE `sessions` (
   `user_id` int(10) UNSIGNED NOT NULL,
-<<<<<<< HEAD
   `date_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-=======
-  `date_time` timestamp NOT NULL,
->>>>>>> e2572922f9c83c139d5ccde39c0e0d881d2b845a
   `last_active` int(2) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -233,11 +198,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`user_id`, `date_time`, `last_active`) VALUES
-<<<<<<< HEAD
 (15123529, '2017-04-15 21:37:00', 1);
-=======
-(15164748, '2017-04-14 16:46:06', 0);
->>>>>>> e2572922f9c83c139d5ccde39c0e0d881d2b845a
 
 -- --------------------------------------------------------
 
@@ -328,7 +289,6 @@ INSERT INTO `tasks` (`task_id`, `user_id`, `task_title`, `task_type`, `descripti
 
 CREATE TABLE `total_sessions` (
   `user_id` int(10) UNSIGNED NOT NULL,
-<<<<<<< HEAD
   `date_logged_in` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `date_logged_out` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -346,12 +306,6 @@ INSERT INTO `total_sessions` (`user_id`, `date_logged_in`, `date_logged_out`) VA
 (15164748, '2017-04-15 19:29:00', '2017-04-15 19:29:00'),
 (15123529, '2017-04-15 20:27:00', '2017-04-15 20:27:00');
 
-=======
-  `date_logged_in` timestamp NOT NULL,
-  `date_logged_out` timestamp NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
->>>>>>> e2572922f9c83c139d5ccde39c0e0d881d2b845a
 -- --------------------------------------------------------
 
 --
@@ -364,25 +318,16 @@ CREATE TABLE `users` (
   `last_name` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `_password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-<<<<<<< HEAD
   `date_joined` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `major` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `score` mediumint(8) UNSIGNED NOT NULL DEFAULT '0',
   `activated` enum('0','1') COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
-=======
-  `date_joined` timestamp NOT NULL,
-  `major` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `score` mediumint(8) UNSIGNED NOT NULL DEFAULT '0',
-  `secretQuestion` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `secretAnswer` varchar(255) COLLATE utf8_unicode_ci NOT NULL
->>>>>>> e2572922f9c83c139d5ccde39c0e0d881d2b845a
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-<<<<<<< HEAD
 INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `email`, `_password`, `date_joined`, `major`, `score`, `activated`) VALUES
 (15157776, 'James', 'Gilatt-Haughton', '15157776@studentmail.ul.ie', '$2y$10$64j9Jb0RA8vVj2zb5D1u1urJapCRxMf0Yk6S6MElBCf3hLhxggR6S', '2017-01-01 00:00:00', 'Computer Science', 1337, '0'),
 (15184234, 'Steven', 'Fitzgerald', '15184234@studentmail.ul.ie', '$2y$10$64j9Jb0RA8vVj2zb5D1u1urJapCRxMf0Yk6S6MElBCf3hLhxggR6S', '2017-01-01 00:00:00', 'Computer Science', 1000, '0'),
@@ -411,36 +356,6 @@ INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `email`, `_password`,
 (15123529, 'Brian', 'Dooley', '15123529@studentmail.ul.ie', '$2y$10$oZKRBWom2OEGXZbIu2PLvubSaD4ZI6Kbo50yubOUcfwNNBqMuO1Ta', '2017-04-15 21:29:56', 'Computer Science', 0, '1'),
 (10000000, 'abcdefghijkl', 'abcdefghijkl', '10000000@studentmail.ul.fuck.yoursel', '$2y$10$20G1xgBu87U3GqY3zYTp2.UUHR5qvWo0tvl1YzlKGRU.36rXGOkKC', '2017-04-07 16:24:41', 'Financial Maths', 0, '0'),
 (555666777, 'alan', 'flynn', '555666777@ul.ie', '$2y$10$AvJbimZ/g5ao/yZHInMQR.i4y19X2cT9BGxfjifhOkpHfpvs0b1aK', '2017-04-15 17:18:43', 'History', 0, '0');
-=======
-INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `email`, `_password`, `date_joined`, `major`, `score`, `secretQuestion`, `secretAnswer`) VALUES
-(15157776, 'James', 'Gilatt-Haughton', '15157776@studentmail.ul.ie', '$2y$10$64j9Jb0RA8vVj2zb5D1u1urJapCRxMf0Yk6S6MElBCf3hLhxggR6S', '2017-01-01 00:00:00', 'Computer Science', 1337, '', ''),
-(15184234, 'Steven', 'Fitzgerald', '15184234@studentmail.ul.ie', '$2y$10$64j9Jb0RA8vVj2zb5D1u1urJapCRxMf0Yk6S6MElBCf3hLhxggR6S', '2017-01-01 00:00:00', 'Computer Science', 1000, '', ''),
-(15164748, 'Artem', 'Semenov', '15164748@studentmail.ul.ie', '$2y$10$lt3cuKQOx.Ol.M/Y/BAwxOXxdY5oWWtQpUqcrpsd2pMXHUKUPrbUG', '2017-01-01 00:00:00', 'Computer Science', 1000, '', ''),
-(15123529, 'Brian', 'Dooley', '15123529@studentmail.ul.ie', '$2y$10$64j9Jb0RA8vVj2zb5D1u1urJapCRxMf0Yk6S6MElBCf3hLhxggR6S', '2017-01-01 00:00:00', 'Computer Science', 1000, '', ''),
-(15111111, 'John', 'Doe', '15111111@studentmail.ul.ie', '$2y$10$64j9Jb0RA8vVj2zb5D1u1urJapCRxMf0Yk6S6MElBCf3hLhxggR6S', '2017-01-01 15:23:11', 'Accounting & Finance', 0, '', ''),
-(15111112, 'Sean', 'McSweeney', '15111112@studentmail.ul.ie', '$2y$10$64j9Jb0RA8vVj2zb5D1u1urJapCRxMf0Yk6S6MElBCf3hLhxggR6S', '2017-01-02 12:23:11', 'History', 0, '', ''),
-(15111113, 'Jane', 'Rielly', '15111113@studentmail.ul.ie', '$2y$10$64j9Jb0RA8vVj2zb5D1u1urJapCRxMf0Yk6S6MElBCf3hLhxggR6S', '2017-01-02 12:23:11', 'Accounting & Finance', 0, '', ''),
-(15111114, 'Mark', 'Brown', '15111114@studentmail.ul.ie', '$2y$10$64j9Jb0RA8vVj2zb5D1u1urJapCRxMf0Yk6S6MElBCf3hLhxggR6S', '2017-01-05 18:55:59', 'Financial Mathematics', 0, '', ''),
-(15111115, 'Rick', 'Ross', '15111115@studentmail.ul.ie', '$2y$10$64j9Jb0RA8vVj2zb5D1u1urJapCRxMf0Yk6S6MElBCf3hLhxggR6S', '2017-01-08 16:20:00', 'Sociology', 0, '', ''),
-(14111111, 'Bill', 'Joe', '14111111@studentmail.ul.ie', '$2y$10$64j9Jb0RA8vVj2zb5D1u1urJapCRxMf0Yk6S6MElBCf3hLhxggR6S', '2017-01-11 16:20:00', 'Biology', 0, '', ''),
-(14111112, 'Steve', 'McGrath', '14111112@studentmail.ul.ie', '$2y$10$64j9Jb0RA8vVj2zb5D1u1urJapCRxMf0Yk6S6MElBCf3hLhxggR6S', '2017-01-15 21:59:59', 'Civil Engineering', 0, '', ''),
-(14111113, 'Oliver', 'Twist', '14111113@studentmail.ul.ie', '$2y$10$64j9Jb0RA8vVj2zb5D1u1urJapCRxMf0Yk6S6MElBCf3hLhxggR6S', '2017-01-15 03:11:01', 'Electrical and Computer Engineering', 0, '', ''),
-(14111114, 'Sarah', 'Walsh', '14111114@studentmail.ul.ie', '$2y$10$64j9Jb0RA8vVj2zb5D1u1urJapCRxMf0Yk6S6MElBCf3hLhxggR6S', '2017-01-18 08:00:00', 'Microbiology', 0, '', ''),
-(14111115, 'Jessica', 'Walsh', '14111115@studentmail.ul.ie', '$2y$10$64j9Jb0RA8vVj2zb5D1u1urJapCRxMf0Yk6S6MElBCf3hLhxggR6S', '2017-01-21 20:20:20', 'Sociology', 0, '', ''),
-(13111111, 'Sean', 'O\'Mahony', '13111111@studentmail.ul.ie', '$2y$10$64j9Jb0RA8vVj2zb5D1u1urJapCRxMf0Yk6S6MElBCf3hLhxggR6S', '2017-01-20 16:54:36', 'Computer Science', 0, '', ''),
-(13111112, 'Timothy', 'James', '13111112@studentmail.ul.ie', '$2y$10$64j9Jb0RA8vVj2zb5D1u1urJapCRxMf0Yk6S6MElBCf3hLhxggR6S', '2017-01-13 06:11:12', 'Civil Engineering', 0, '', ''),
-(12111111, 'Bob', 'Ronson', '12111111@studentmail.ul.ie', '$2y$10$64j9Jb0RA8vVj2zb5D1u1urJapCRxMf0Yk6S6MElBCf3hLhxggR6S', '2017-01-25 01:23:45', 'Civil Engineering', 0, '', ''),
-(11111111, 'Francois', 'Hollonde', '11111111@studentmail.ul.ie', '$2y$10$64j9Jb0RA8vVj2zb5D1u1urJapCRxMf0Yk6S6MElBCf3hLhxggR6S', '2017-02-01 16:20:00', 'Chemistry', 0, '', ''),
-(10111111, 'Michael', 'Moore', '10111111@studentmail.ul.ie', '$2y$10$64j9Jb0RA8vVj2zb5D1u1urJapCRxMf0Yk6S6MElBCf3hLhxggR6S', '2017-02-02 15:35:00', 'Electrical and Computer Engineering', 0, '', ''),
-(10111112, 'Jane', 'Fitzgerald', '10111112@studentmail.ul.ie', '$2y$10$64j9Jb0RA8vVj2zb5D1u1urJapCRxMf0Yk6S6MElBCf3hLhxggR6S', '2017-02-05 10:10:10', 'Sociology', 0, '', ''),
-(16111111, 'Amy', 'Mahon', '16111111@studentmail.ul.ie', '$2y$10$64j9Jb0RA8vVj2zb5D1u1urJapCRxMf0Yk6S6MElBCf3hLhxggR6S', '2017-02-06 11:11:11', 'Financial Mathematics', 0, '', ''),
-(22222222, 'Paul', 'Blart', 'paul.blart@ul.ie', '$2y$10$64j9Jb0RA8vVj2zb5D1u1urJapCRxMf0Yk6S6MElBCf3hLhxggR6S', '2017-02-07 12:12:12', 'Microbiology', 0, '', ''),
-(33333333, 'John', 'Snow', 'john.snow@ul.ie', '$2y$10$64j9Jb0RA8vVj2zb5D1u1urJapCRxMf0Yk6S6MElBCf3hLhxggR6S', '2017-02-11 16:20:00', 'Electrical and Computer Engineering', 0, '', ''),
-(16111112, 'Mary', 'Wall', '16111112@studentmail.ul.ie', '$2y$10$64j9Jb0RA8vVj2zb5D1u1urJapCRxMf0Yk6S6MElBCf3hLhxggR6S', '2017-02-13 15:15:00', 'Microbiology', 0, '', ''),
-(16111113, 'Sue', 'Hill', '16111113@studentmail.ul.ie', '$2y$10$64j9Jb0RA8vVj2zb5D1u1urJapCRxMf0Yk6S6MElBCf3hLhxggR6S', '2017-02-14 03:45:01', 'Biology', 0, '', ''),
-(0, 'abcdefghijkl', 'abcdefghijkl', '00000000@studentmail.ul.fuck.yourself', '$2y$10$bN1qXwx5pFR29ljUvwEnFOn0tNeanwhYsc0cb/4h2qIGmQIqEEE/y', '2017-04-07 16:22:48', 'Electrical & Computer Engineering', 0, '', ''),
-(10000000, 'abcdefghijkl', 'abcdefghijkl', '10000000@studentmail.ul.fuck.yoursel', '$2y$10$20G1xgBu87U3GqY3zYTp2.UUHR5qvWo0tvl1YzlKGRU.36rXGOkKC', '2017-04-07 16:24:41', 'Financial Maths', 0, '', '');
->>>>>>> e2572922f9c83c139d5ccde39c0e0d881d2b845a
 
 --
 -- Indexes for dumped tables

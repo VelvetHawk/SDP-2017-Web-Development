@@ -40,9 +40,6 @@
 									</header>
                                     <?php if(!(isset($_SESSION['username']) || isCookieValid($GLOBALS['pdo']))): ?>
                                         <?php redirectTo('index'); ?>
-                                    <!--<p class="lead">You are currently not signed in<br><a href="login.php">Login</a><br>
-                                        Not yet a member? <a href="signup.php">Sign up here</a><br>
-                                    </p>-->
                                     <?php else: ?>
 									<!-- Posts -->
 									<div class="posts">

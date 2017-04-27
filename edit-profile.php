@@ -18,8 +18,9 @@ include_once "res/partials/parseChangePassword.php";
         ?>
         <title>Proofreadr - For all your grammar needs</title>
         <meta name="description" content="This should contain a description about this particular page">
+        <script src="res/js/profile-tags.js"></script>
     </head>
-    <body>
+    <body onload="addOnClick()">
 
         <!-- Wrapper -->
         <div id="wrapper">
@@ -44,9 +45,10 @@ include_once "res/partials/parseChangePassword.php";
                         </header>
 
                         <?php if(!(isset($_SESSION['username']) || isCookieValid($GLOBALS['pdo']))): ?>
-                            <p class="lead">You are currently not signed in<br><a href="login.php">Login</a><br>
+<!--                             <p class="lead">You are currently not signed in<br><a href="login.php">Login</a><br>
                                 Not yet a member? <a href="signup.php">Sign up here</a><br>
-                            </p>
+                            </p> -->
+                            <?php redirectTo("index"); ?>
                         <?php else: ?>
                             <div>
                                 <script>
@@ -60,16 +62,19 @@ include_once "res/partials/parseChangePassword.php";
                                 <?php if(!empty($form_errors)) echo show_errors($form_errors); ?>
                             </div>
                         <!-- need to let server know sending file-->
-<<<<<<< HEAD
-                            <form method="post" action="res/partials/parseProfile.php" enctype="multipart/form-data">
+                            <form id="first_form" method="post" action="res/partials/parseProfile.php" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label for="emailField">Email</label>
                                     <input type="text" name="email" class="form-control" id="emailField" value="<?php if(isset($email)) echo $email; ?>">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="usernameField">Username</label>
-                                    <input type="text" name="username" class="form-control" id="usernameField" value="<?php if(isset($username)) echo $username; ?>">
+                                    <!-- Add code to load subscribed tags from memory via PHP -->
+                                    <label for="usernameField">Your Tags (Press Enter to add new tag fields)</label>
+                                    <input type="hidden" name="tags" id="tags" value="0">
+                                    <div id="entry-area" contenteditable="false" class="entry-area">
+                                        <?php if (isset($subscribed_HTML)) echo $subscribed_HTML; ?>
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
@@ -81,14 +86,14 @@ include_once "res/partials/parseChangePassword.php";
                                 <input type="hidden" name="token" value="<?php if(function_exists('_token')) echo _token(); ?>">
                                 <div class="12u$">
                                     <ul class="actions button-float-right">
-                                        <li><button name="updateProfileButton" type="submit" value="Submit" class="special">Update Profile</button></li>
+                                        <li><button id="updateProfileButton" name="updateProfileButton" type="submit value="Submit" class="special">Update Profile</button></li>
 
                                     </ul>
                                 </div>
                             </form><br><br>
                             <!-- CHANGE PASSWORD -->
                             <header class="major">
-                                <h2>Change Password</h2>
+                                <h2>Password Management</h2>
                             </header>
                             <form method="post" action="" enctype="multipart/form-data">
                                 <div class="form-group">
@@ -117,33 +122,7 @@ include_once "res/partials/parseChangePassword.php";
                                     </ul>
                                 </div>
                             </form>
-=======
-                        <form method="post" action="res/partials/parseProfile.php" enctype="multipart/form-data">
-                            <div class="form-group">
-                                <label for="emailField">Email</label>
-                                <input type="text" name="email" class="form-control" id="emailField" value="<?php if(isset($email)) echo $email; ?>">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="usernameField">Username</label>
-                                <input type="text" name="username" class="form-control" id="usernameField" value="<?php if(isset($username)) echo $username; ?>">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="fileField">Avatar</label>
-                                <input type="file" name="fileToUpload" id="fileField">
-                            </div>
-
-                            <input type="hidden" name="hidden_id" value="<?php if(isset($id)) echo $id; ?>">
-                            <input type="hidden" name="token" value="<?php if(function_exists('_token')) echo _token(); ?>">
-                            <div class="12u$">
-                                <ul class="actions button-float-right">
-                                    <li><button name="updateProfileButton" type="submit" value="Submit" class="special">Update Profile</button></li>
-
-                                </ul>
-                            </div>
->>>>>>> e2572922f9c83c139d5ccde39c0e0d881d2b845a
-                        <p><a href="home.php">Back</a></p>
+                        <p><a href="profile.php">Back</a></p>
                         <?php endif ?>
 
                     </section>
@@ -160,5 +139,10 @@ include_once "res/partials/parseChangePassword.php";
         <?php
         include_once "res/partials/script-calls.php";
         ?>
+        <script>
+            document.getElementById("entry-area").setAttribute("onmouseover", "mouseOn()");
+            document.getElementById("entry-area").setAttribute("onmouseout", "mouseOff()");
+            document.getElementById("updateProfileButton").setAttribute("onClick", "addTagsToSubmit()");
+        </script>
 </body>
 </html>

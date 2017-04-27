@@ -87,7 +87,7 @@
 												{
 													for ($j = 0; $j < sizeof($tag_id_array); $j++)
 													{ 
-														$query = "SELECT task_id FROM Tasks WHERE tags LIKE '%".$tag_id_array[$j].",%' OR tags LIKE '%,".$tag_id_array[$j].",%' OR tags LIKE '%,".$tag_id_array[$j]."%';";
+														$query = "SELECT task_id FROM Tasks WHERE tags LIKE '%".$tag_id_array[$j].",%' OR tags LIKE '%,".$tag_id_array[$j].",%' OR tags LIKE '%,".$tag_id_array[$j]."%' AND user_id <> " . $_SESSION['username'] . ";";
 														foreach ($GLOBALS['pdo'] -> query($query) as $task)
 														{
 															$task_matches[$i] = $task['task_id'];
